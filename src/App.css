@@ -1,0 +1,1379 @@
+/* ========================================= */
+/* GLOBAL RESET & VARIABLES */
+/* ========================================= */
+:root {
+  /* SKEMA WARNA REVISI (Premium Cyan/Navy) */
+  --primary: #08192f; /* Darker Navy/Blue Black */
+  --primary-soft: #0e2746;
+  --secondary: #f8f8ff; /* Off-White / Teks */
+  --accent: #00b4ff; /* Aksen Cyan Cerah */
+  --dark-accent: #0588c7; /* Aksen sedikit gelap untuk hover/cta */
+  --navbar-bg: rgba(10, 25, 47, 0.95);
+  --hover-bg: #172a45;
+  --panel: rgba(13, 30, 53, 0.82);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --muted: rgba(232, 241, 251, 0.76);
+  --shadow: rgba(0, 0, 0, 0.4);
+  --navbar-height: 70px;
+
+  /* Font */
+  --font-family: "Poppins", sans-serif;
+
+  /* Padding Global */
+  --section-padding: 8rem 7% 1.4rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  scroll-behavior: smooth;
+}
+
+/* ========================================= */
+/* BODY & ROOT */
+/* ========================================= */
+html,
+body,
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background:
+    radial-gradient(circle at top left, rgba(0, 180, 255, 0.12), transparent 26%),
+    linear-gradient(180deg, #071426 0%, #08192f 38%, #071426 100%);
+  color: var(--secondary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ========================================= */
+/* NAVBAR (Logo Proporsional) */
+/* ========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.05rem 7%;
+  background: rgba(7, 20, 37, 0.82);
+  border-bottom: 1px solid rgba(0, 180, 255, 0.22);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(16px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.navbar .navbar-logo {
+  width: 40px;
+  height: auto;
+}
+
+.navbar .navbar-logo-text {
+  font-size: 1.72rem;
+  font-weight: 700;
+  color: var(--secondary);
+  letter-spacing: -0.04em;
+}
+
+.navbar .navbar-nav a {
+  color: var(--secondary);
+  display: inline-block;
+  font-size: 0.98rem;
+  margin: 0 0.9rem;
+  position: relative;
+  transition: color 0.2s;
+  opacity: 0.9;
+}
+
+.navbar .navbar-nav a:hover {
+  color: var(--accent);
+}
+
+.navbar .navbar-nav a::before {
+  content: "";
+  position: absolute;
+  bottom: -0.3rem;
+  left: 0;
+  width: 0;
+  height: 0.1rem;
+  background: var(--accent);
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar .navbar-nav a:hover::before {
+  width: 100%;
+}
+
+.navbar .navbar-extra {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar .navbar-extra a {
+  color: var(--secondary);
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+}
+
+.navbar .navbar-extra a:hover {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* PERBAIKAN HAMBURGER MENU */
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary);
+  /* DEFAULT: Sembunyikan di desktop */
+  display: none; 
+}
+/* END PERBAIKAN HAMBURGER MENU */
+
+
+/* ========================================= */
+/* HERO SECTION */
+/* ========================================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url("./assets/883.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding-top: calc(var(--navbar-height) + 2rem);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba(5, 16, 34, 0.82) 0%, rgba(7, 20, 37, 0.6) 38%, rgba(8, 25, 47, 0.46) 100%);
+}
+
+.hero .content {
+  padding: 1.4rem 7%;
+  max-width: 64rem;
+  position: relative;
+  z-index: 10;
+}
+
+.hero .content > * {
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero .content > *:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.hero .content > *:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.hero .content > *:nth-child(3) {
+  animation-delay: 0.28s;
+}
+
+.hero .content > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.hero .content > *:nth-child(5) {
+  animation-delay: 0.52s;
+}
+
+.hero .content .hero-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+  padding: 0.7rem 1rem 0.7rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(7, 20, 37, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+}
+
+.hero .content .hero-brand span {
+  color: rgba(239, 245, 255, 0.92);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.hero .content .hero-mark {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 22px rgba(0, 180, 255, 0.28));
+  animation: heroMarkFloat 5s ease-in-out infinite;
+}
+
+.hero .content .hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.15rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(9, 25, 44, 0.45);
+  color: rgba(228, 241, 255, 0.78);
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+}
+
+.hero .content h1 {
+  font-size: clamp(3.8rem, 7vw, 6.2rem);
+  color: var(--secondary);
+  line-height: 1.08;
+  max-width: 11ch;
+  text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+}
+
+.hero .content h1 span {
+  color: var(--accent);
+}
+
+.hero .content p {
+  margin-top: 1.35rem;
+  max-width: 36rem;
+  font-size: 1.08rem;
+  font-weight: 300;
+  line-height: 1.8;
+  text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+  color: rgba(239, 245, 255, 0.82);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.hero .content .cta {
+  margin-top: 0;
+  padding: 0.95rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--secondary);
+  background-color: var(--dark-accent);
+  border-radius: 999px;
+  display: inline-block;
+  box-shadow: 0 10px 30px rgba(0, 180, 255, 0.18);
+  transition: all 0.2s ease;
+}
+
+.hero .content .cta:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroMarkFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+/* ========================================= */
+/* COMMON SECTION STYLES */
+/* ========================================= */
+.about,
+.service,
+.project,
+.contact {
+  padding: var(--section-padding);
+  position: relative;
+}
+
+.about h2,
+.service h2,
+.project h2,
+.contact h2 {
+  text-align: center;
+  font-size: clamp(2.3rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+  letter-spacing: -0.04em;
+}
+
+.about h2 span,
+.service h2 span,
+.project h2 span,
+.contact h2 span {
+  color: var(--accent);
+}
+
+.section-intro,
+.project-subheading,
+.contact-subheading {
+  text-align: center;
+  max-width: 46rem;
+  margin: 0 auto 3rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+/* ========================================= */
+/* ABOUT SECTION (Lanyard di Kanan) */
+/* ========================================= */
+.about {
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.about-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  margin-top: -2rem;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+}
+.about-content {
+  flex: 1 1 50%;
+  justify-content: center;
+  text-align: center;
+  max-width: 60rem;
+  margin: auto auto 3rem;
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem clamp(1.5rem, 3vw, 2.75rem);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(16, 35, 60, 0.78), rgba(9, 22, 40, 0.92));
+  border: 1px solid var(--panel-border);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.about-content p {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  line-height: 1.85;
+  margin-bottom: 0;
+  color: rgba(244, 248, 255, 0.92);
+}
+
+/* ========================================= */
+/* SERVICE SECTION (Card Layout) */
+/* ========================================= */
+
+.service-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.service-card {
+  background:
+    linear-gradient(180deg, rgba(18, 39, 68, 0.92), rgba(10, 24, 43, 0.98));
+  padding: 2rem;
+  border-radius: 22px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  border-color: rgba(0, 180, 255, 0.32);
+}
+
+.service-card-img,
+.service-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 0 1rem;
+  color: var(--accent);
+}
+.service-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.service-card h3 {
+  font-size: 1.6rem;
+  color: var(--secondary);
+  margin-bottom: 0.75rem;
+}
+
+.service-card p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  flex: 1 1 auto;
+}
+
+.service-cta {
+  display: inline-flex;
+  width: fit-content;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0, 180, 255, 0.32);
+  padding-bottom: 0.2rem;
+}
+.service-cta:hover {
+  color: var(--secondary);
+  border-bottom: 1px dashed var(--secondary);
+}
+
+/* ========================================= */
+/* PROJECT SECTION */
+/* ========================================= */
+.project-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 5rem;
+}
+
+.project .project-card {
+  background:
+    linear-gradient(180deg, rgba(16, 35, 60, 0.9), rgba(8, 21, 39, 0.96));
+  padding: 1.5rem;
+  border-radius: 22px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.project .project-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  border-color: rgba(0, 180, 255, 0.3);
+}
+
+.project .project-card-img {
+  border-radius: 16px;
+  width: 100%;
+  max-width: none;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 1px solid var(--accent);
+}
+
+.project .project-card-title {
+  font-size: 1.5rem;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.project .project-card-description {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--muted);
+  margin: 0.5rem 0 1.25rem 0;
+  line-height: 1.75;
+  flex: 1 1 auto;
+}
+
+.project-link {
+  color: var(--accent);
+  font-weight: 600;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+
+.project-link:hover {
+  color: var(--secondary);
+}
+
+/* ========================================= */
+/* CONTACT SECTION */
+/* ========================================= */
+/* Form Container (Hanya untuk centering dan padding) */
+.contact-form-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ========================================= */
+/* FOOTER STYLE */
+/* ========================================= */
+.footer {
+  padding: 3rem 7% 2.5rem;
+  text-align: center;
+  color: var(--secondary);
+  border-top: 1px solid rgba(0, 180, 255, 0.2);
+  font-size: 0.9rem;
+  background: linear-gradient(180deg, rgba(6, 16, 31, 0.2), rgba(6, 16, 31, 0.5));
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+}
+
+.footer-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.footer-copy {
+  max-width: 38rem;
+  margin: 0 auto 0.8rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+
+/* ====================== MODAL STYLES ====================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(0, 180, 255, 0.14), transparent 30%),
+    rgba(3, 10, 20, 0.82);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.modal-content {
+  background:
+    linear-gradient(180deg, rgba(16, 35, 60, 0.96), rgba(8, 18, 34, 0.98));
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 180, 255, 0.28);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: white;
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #b7cce2;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: 0.3s;
+}
+
+.close-modal:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  color: #dff6ff;
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+
+.modal-body {
+  text-align: left;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+/* Supaya \n di JavaScript berfungsi jadi baris baru */
+.modal-body p {
+  white-space: pre-line;
+}
+
+.modal-content .cta {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: #01d1ff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.modal-content .cta:hover {
+  background-color: #00b8e6;
+  transform: translateY(-3px);
+}
+
+.pdf-modal {
+  width: min(96vw, 1560px);
+  height: min(96vh, 1100px);
+  max-width: none;
+  min-height: 0;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pdf-modal > .close-modal {
+  display: none;
+}
+
+.pdf-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-right: 56px;
+  flex: 0 0 auto;
+}
+
+.pdf-modal-header h3 {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+}
+
+.pdf-modal-header p {
+  color: rgba(224, 239, 255, 0.78);
+  line-height: 1.7;
+  max-width: 54rem;
+}
+
+.pdf-modal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: rgba(0, 180, 255, 0.12);
+  border: 1px solid rgba(0, 180, 255, 0.22);
+  color: #8fe5ff;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pdf-modal-badge {
+  white-space: nowrap;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #dff6ff;
+  font-weight: 600;
+}
+
+.pdf-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.85rem 1.15rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #dff6ff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.pdf-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.pdf-close-icon {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f4fbff;
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.25s ease;
+  z-index: 2;
+}
+
+.pdf-close-icon:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.04);
+}
+
+.pdf-preview-shell {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    #061120;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.pdf-preview-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: clamp(14px, 2vw, 28px);
+}
+
+.pdf-pages-stack {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pdf-page-shell {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 1.25rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 249, 252, 0.98));
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.pdf-page-label {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(6, 17, 32, 0.08);
+  color: rgba(6, 17, 32, 0.68);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pdf-page-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.pdf-page-watermark {
+  position: absolute;
+  inset: 2rem 1.25rem 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pdf-page-watermark span {
+  transform: rotate(-28deg);
+  color: rgba(4, 24, 49, 0.1);
+  font-size: clamp(0.95rem, 1.7vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-align: center;
+}
+
+.pdf-preview-status {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: rgba(224, 239, 255, 0.82);
+  text-align: center;
+}
+
+.pdf-preview-error {
+  color: #ffd7d7;
+}
+
+.pdf-loader {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: #00b4ff;
+  animation: spin 0.9s linear infinite;
+}
+
+.pdf-preview-meta {
+  position: sticky;
+  bottom: 0;
+  width: fit-content;
+  margin: 1rem auto 0;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(6, 17, 32, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(224, 239, 255, 0.8);
+  font-size: 0.85rem;
+  backdrop-filter: blur(10px);
+}
+
+.pdf-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: 0 0 auto;
+  padding-top: 0.25rem;
+}
+
+.pdf-modal-footer p {
+  color: rgba(224, 239, 255, 0.75);
+  line-height: 1.6;
+  max-width: 36rem;
+}
+
+.pdf-modal-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+
+
+
+
+
+
+
+
+
+/* ========================================= */
+/* SEARCH INLINE DAN TRANSISI HORIZONTAL */
+/* ========================================= */
+
+.search-form {
+    display: flex; 
+    align-items: center;
+    width: 0; 
+    opacity: 0;
+    transition: width 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden; 
+}
+
+.search-form.active {
+    width: 250px;
+    opacity: 1;
+}
+
+.search-form input {
+    width: 250px;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.08); 
+    color: white; 
+    border: 1px solid rgba(0, 180, 255, 0.24);
+    outline: none;
+    font-size: 1rem;
+}
+
+/* ========================================= */
+/* CONTACT FORM STYLING BARU (Dinamis) */
+/* ========================================= */
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+    max-width: 680px;
+    margin: 0 auto; 
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    background:
+      linear-gradient(180deg, rgba(19, 34, 52, 0.94), rgba(10, 21, 37, 0.98)); 
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-form-note {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(223, 246, 255, 0.76);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04); 
+    color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #00bcd4; 
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Tombol Submit */
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    background-color: #00bcd4; 
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #00e5ff; 
+    transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+    background-color: #555;
+    color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Ikon Loading */
+.loading-icon {
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+/* Animasi Putar */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Status Pesan */
+.form-status {
+    margin-top: 0.5rem;
+    padding: 0.95rem 1rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.form-status svg {
+    margin-right: 0.5rem;
+}
+
+.form-status.success {
+    background-color: rgba(76, 175, 80, 0.2); 
+    color: #4CAF50;
+}
+
+.form-status.error {
+    background-color: rgba(244, 67, 54, 0.2); 
+    color: #F44336;
+}
+
+
+/* ========================================= */
+/* MEDIA QUERIES (RESPONSIVE) - HYBRID APPROACH */
+/* ========================================= */
+
+/* ---------- Laptop / Desktop Small (1366px) ---------- */
+@media (max-width: 1366px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+/* ---------- Tablet & Mobile (768px) ---------- */
+@media (max-width: 768px) {
+  /* GLOBAL FONT & PADDING */
+  html {
+    font-size: 62.5%; 
+  }
+
+  :root {
+    --section-padding: 6rem 5% 2rem; 
+  }
+
+  .hero .content h1 {
+    font-size: 4rem; 
+  }
+
+  .hero .content .hero-brand {
+    margin-bottom: 1rem;
+  }
+
+  .hero .content p {
+    font-size: 1.08rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    margin-top: 1.5rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--navbar-height) + 3rem);
+    padding-bottom: 6rem;
+  }
+
+  .about h2,
+  .service h2,
+  .project h2,
+  .contact h2 {
+    font-size: 2.2rem; 
+    margin-bottom: 2rem;
+  }
+  
+  /* NAVBAR MOBILE LOGIC */
+  
+  /* TAMPILKAN HAMBURGER DI MOBILE */
+  .hamburger-btn {
+    display: inline-block; /* TAMPILKAN di Mobile */
+    font-size: 2rem;
+  }
+
+  .navbar .navbar-extra .search-form, 
+  .navbar .navbar-extra #search {
+    display: none;
+  }
+
+  .navbar .navbar-nav {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    width: 80vw;
+    max-width: 300px;
+    height: 100vh;
+    background:
+      linear-gradient(180deg, rgba(8, 25, 47, 0.98), rgba(7, 20, 37, 0.98));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4.5rem;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .navbar .navbar-nav.active {
+    right: 0;
+  }
+
+  .navbar .navbar-nav a {
+    color: var(--secondary);
+    display: block;
+    margin: 1.1rem 0;
+    font-size: 1.45rem;
+    text-align: center;
+  }
+
+  .navbar .navbar-nav a::before {
+    display: none;
+  }
+  
+  /* ========================================= */
+  /* LANYARD & ABOUT SECTION (Pseudo-2 Kolom) */
+  /* ========================================= */
+  .about-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .lanyard-wrapper {
+    flex: 0 0 auto;
+    height: 320px;
+    order: 1;
+    margin: 0 auto 0.25rem;
+    min-width: unset; 
+  }
+
+  .about-content {
+    order: 2;
+    flex: 1 1 100%;
+    text-align: left; 
+  }
+  .about-content p {
+    text-align: left;
+    font-size: 1.08rem;
+  }
+
+  .service-cards-container,
+  .project-row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .service-card,
+  .project .project-card,
+  .contact-form {
+    border-radius: 20px;
+  }
+  
+  /* LOGO LOOP (OVERRIDE DARI logoloop.css) */
+.footer > div {
+    --logoloop-gap: 20px;
+    --logoloop-logoHeight: 20px;
+    height: 40px !important; 
+}
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  .pdf-modal {
+    width: calc(100vw - 16px);
+    height: calc(100vh - 16px);
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .pdf-modal-header,
+  .pdf-modal-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pdf-modal-header {
+    padding-right: 44px;
+  }
+
+  .pdf-modal-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .pdf-modal-badge {
+    text-align: center;
+  }
+
+  .pdf-preview-stage {
+    padding: 12px;
+  }
+
+  .pdf-page-shell {
+    padding: 2.6rem 0.7rem 0.7rem;
+    border-radius: 16px;
+  }
+
+  .pdf-page-watermark {
+    inset: 1.8rem 0.7rem 0.7rem;
+  }
+
+  .pdf-modal-footer-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .pdf-modal-footer-actions .cta,
+  .pdf-secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer {
+    padding-inline: 5%;
+  }
+
+
+}
+
+/* ---------- Mobile Kecil (450px) ---------- */
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+  
+  .navbar .navbar-logo {
+    width: 30px;
+  }
+  .navbar .navbar-logo-text {
+    font-size: 1.5rem;
+  }
+
+  .hero .content h1 {
+    font-size: 3rem;
+  }
+
+  .hero .content .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero .content .hero-brand {
+    gap: 0.7rem;
+    padding: 0.6rem 0.85rem 0.6rem 0.65rem;
+  }
+
+  .hero .content .hero-brand span {
+    font-size: 0.9rem;
+  }
+
+  .hero .content .hero-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .hero .content p {
+    max-width: 100%;
+  }
+
+  .hero .content .cta {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* LANYARD SANGAT KECIL (untuk layar 320-450px) */
+  .lanyard-wrapper {
+    height: 240px;
+  }
+  
+  .about-content {
+    padding: 1.4rem;
+  }
+
+  .footer > div {
+        --logoloop-gap: 15px;
+        --logoloop-logoHeight: 1px;
+        height: 30px !important; 
+    }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-content {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .close-modal {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+  }
+
+  .pdf-modal {
+    width: calc(100vw - 12px);
+    height: calc(100vh - 12px);
+  }
+
+  .pdf-close-icon {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+
+}
