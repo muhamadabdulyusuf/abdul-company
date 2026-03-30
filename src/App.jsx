@@ -61,6 +61,86 @@ const techLogos = [
   },
 ];
 
+const serviceGroups = [
+  {
+    title: "Food & Beverage Service & Guest Experience",
+    description:
+      "Kemampuan yang berangkat dari pengalaman lapangan, pelayanan tamu, dan ritme kerja operasional yang menuntut presisi serta konsistensi.",
+    items: [
+      {
+        icon: "user-check",
+        title: "Food & Beverage Service",
+        summary:
+          "Berpengalaman menangani guest service, room service, dan support banquet dengan standar hospitality yang rapi dan responsif.",
+        detail:
+          "Detail Pengalaman:\n• Waiter: Menangani guest relations dan table setup.\n• Room Service: Delivering food & service dengan standar privasi tamu.\n• Banquet: Berpengalaman melayani event berskala besar (Wedding/Gala).",
+      },
+      {
+        icon: "coffee",
+        title: "Barista",
+        summary:
+          "Fokus pada konsistensi rasa, kecepatan kerja, dan kualitas visual sajian dalam operasional beverage sehari-hari.",
+        detail:
+          "Pencapaian dalam 2 Bulan:\n• Hafal 15+ resep beverage (Espresso & Non-Coffee) secara presisi.\n• Menguasai teknik milk steaming untuk texture yang halus.\n• Mahir membuat basic latte art (Pattern Love) untuk standar sajian.",
+      },
+    ],
+  },
+  {
+    title: "Administrative & Office Skills",
+    description:
+      "Dibangun untuk mendukung alur kerja internal agar lebih tertata, efisien, dan mudah dijalankan dalam kebutuhan operasional harian.",
+    items: [
+      {
+        icon: "mail",
+        title: "Email Management",
+        summary:
+          "Mengelola inbox, menyusun draft profesional, dan memfilter prioritas komunikasi agar arus kerja tetap terjaga.",
+        detail:
+          "• Memfilter email masuk berdasarkan prioritas.\n• Menyusun draf balasan profesional untuk klien.\n• Membersihkan spam dan mengorganisir folder arsip.",
+      },
+      {
+        icon: "layers",
+        title: "Microsoft Office",
+        summary:
+          "Mahir menggunakan Word, Excel, dan PowerPoint untuk kebutuhan dokumen, laporan, serta presentasi kerja.",
+        detail:
+          "• Excel: Pembuatan laporan keuangan, pivot table, dan otomasi data.\n• Word: Pembuatan surat resmi, proposal, dan dokumen bisnis.\n• PPT: Desain slide presentasi yang clean dan profesional.",
+      },
+      {
+        icon: "clipboard",
+        title: "Administrative",
+        summary:
+          "Mendukung pekerjaan administratif mulai dari data entry, pengarsipan digital, hingga penjadwalan harian.",
+        detail:
+          "• Data Entry: Input data cepat dengan akurasi tinggi.\n• Calendar Management: Mengatur jadwal meeting dan pengingat harian.\n• Digital Filing: Pengarsipan dokumen cloud yang sistematis.",
+      },
+    ],
+  },
+  {
+    title: "Creative & Digital Skills",
+    description:
+      "Digunakan untuk membentuk komunikasi visual yang lebih jelas, konsisten, dan relevan untuk kebutuhan personal maupun bisnis.",
+    items: [
+      {
+        icon: "pen-tool",
+        title: "Design",
+        summary:
+          "Membuat visual yang rapi dan komunikatif untuk kebutuhan presentasi, promosi, dan materi pendukung brand.",
+        detail:
+          "• Social Media Graphics: Desain feed dan story Instagram yang estetik.\n• Presentation Design: Slide PowerPoint/Canva yang profesional.\n• Branding: Pembuatan aset visual sederhana untuk identitas bisnis.",
+      },
+      {
+        icon: "share-2",
+        title: "Social Media Management",
+        summary:
+          "Mengelola kehadiran digital melalui perencanaan konten, interaksi audiens, dan monitoring performa.",
+        detail:
+          "• Content Planning: Membuat kalender konten mingguan.\n• Audience Interaction: Merespons komentar dan DM secara profesional.\n• Analytics: Memantau pertumbuhan followers dan engagement.",
+      },
+    ],
+  },
+];
+
 // ====================== CONTACT FORM ======================
 function ContactForm() {
   const [result, setResult] = useState("");
@@ -81,7 +161,9 @@ function ContactForm() {
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       const message = form.message.value.trim();
-      const subject = encodeURIComponent(`Inquiry from ${name || "Website Visitor"}`);
+      const subject = encodeURIComponent(
+        `Inquiry from ${name || "Website Visitor"}`,
+      );
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       );
@@ -182,10 +264,16 @@ function App() {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeModal, setActiveModal] = useState(null);
+  const [activeServiceGroup, setActiveServiceGroup] = useState(
+    serviceGroups[0].title,
+  );
 
   const navbarRef = useRef(null);
   const hamburgerRef = useRef(null);
   const searchInputRef = useRef(null);
+  const currentServiceGroup =
+    serviceGroups.find((group) => group.title === activeServiceGroup) ||
+    serviceGroups[0];
 
   const openServiceModal = (e, title, detail) => {
     e.preventDefault();
@@ -196,7 +284,7 @@ function App() {
     e.preventDefault();
     setActiveModal({
       type: "pdf",
-      title: "Bare Minimum Crew",
+      title: "Handbook by Ari",
       detail: "",
       pdfSrc: "/documents/handbook.pdf",
     });
@@ -334,14 +422,15 @@ function App() {
       {/* HERO */}
       <section className="hero" id="home">
         <main className="content">
-          <span className="hero-eyebrow">Abdul Company Creative Laboratory</span>
+          <span className="hero-eyebrow">
+            Abdul Company Creative Laboratory
+          </span>
           <h1>
             Tempat kerja yang <span>tenang, rapi, dan terus bertumbuh.</span>
           </h1>
           <p>
-            Abdul Company adalah ruang tempat karya, sistem, dan kolaborasi
-            saya disusun dengan pendekatan yang bersih, fungsional, dan
-            profesional.
+            Abdul Company adalah ruang tempat karya, sistem, dan kolaborasi saya
+            disusun dengan pendekatan yang bersih, fungsional, dan profesional.
           </p>
           <div className="hero-actions">
             <a href="#project" className="cta">
@@ -405,175 +494,36 @@ function App() {
             mouseConstraintStiffness={0.9}
           />
         </div>
-        <div className="service-cards-container">
-          {/* Email Management */}
-          <div className="service-card">
-            <i data-feather="mail" className="service-icon"></i>
-            <h3>Email Management</h3>
-            <p>
-              Mengatur lalu lintas pesan masuk (inbox), menyusun draf balasan
-              profesional, serta melakukan kurasi email penting agar komunikasi
-              bisnis tetap berjalan lancar.
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Email Management",
-                  "• Memfilter email masuk berdasarkan prioritas.\n• Menyusun draf balasan profesional untuk klien.\n• Membersihkan spam dan mengorganisir folder arsip.",
-                )
-              }
+        <div className="service-tabs">
+          {serviceGroups.map((group) => (
+            <button
+              key={group.title}
+              type="button"
+              className={`service-tab ${group.title === currentServiceGroup.title ? "active" : ""}`}
+              onClick={() => setActiveServiceGroup(group.title)}
             >
-              Learn More
-            </a>
-          </div>
-
-          {/* Microsoft Office */}
-          <div className="service-card">
-            <i data-feather="layers" className="service-icon"></i>
-            <h3>Microsoft Office</h3>
-            <p>
-              Mahir mengoperasikan Word, Excel, dan PowerPoint untuk mendukung
-              kebutuhan bisnis dan presentasi.
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Microsoft Office",
-                  "• Excel: Pembuatan laporan keuangan, pivot table, dan otomasi data.\n• Word: Pembuatan surat resmi, proposal, dan dokumen bisnis.\n• PPT: Desain slide presentasi yang clean dan profesional.",
-                )
-              }
-            >
-              Learn More
-            </a>
-          </div>
-
-          {/* Administrative */}
-          <div className="service-card">
-            <i data-feather="clipboard" className="service-icon"></i>
-            <h3>Administrative</h3>
-            <p>
-              Menyediakan dukungan operasional mulai dari entri data, manajemen
-              jadwal, hingga pengarsipan dokumen digital.
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Administrative Support",
-                  "• Data Entry: Input data cepat dengan akurasi tinggi.\n• Calendar Management: Mengatur jadwal meeting dan pengingat harian.\n• Digital Filing: Pengarsipan dokumen cloud yang sistematis.",
-                )
-              }
-            >
-              Learn More
-            </a>
-          </div>
-
-          {/* Sosial Media Management */}
-          <div className="service-card">
-            <i data-feather="share-2" className="service-icon"></i>
-            <h3>Sosial Media Management</h3>
-            <p>
-              Mengelola kehadiran digital melalui perencanaan konten yang
-              konsisten dan memantau interaksi audiens.
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Social Media Management",
-                  "• Content Planning: Membuat kalender konten mingguan.\n• Audience Interaction: Merespons komentar dan DM secara profesional.\n• Analytics: Memantau pertumbuhan followers dan engagement.",
-                )
-              }
-            >
-              Learn More
-            </a>
-          </div>
-
-          {/* Design */}
-          <div className="service-card">
-            <i data-feather="pen-tool" className="service-icon"></i>
-            <h3>Design</h3>
-            <p>
-              Menyediakan jasa desain grafis kreatif untuk kebutuhan promosi,
-              konten media sosial, dan presentasi.
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Creative Design",
-                  "• Social Media Graphics: Desain feed dan story Instagram yang estetik.\n• Presentation Design: Slide PowerPoint/Canva yang profesional.\n• Branding: Pembuatan aset visual sederhana untuk identitas bisnis.",
-                )
-              }
-            >
-              Learn More
-            </a>
-          </div>
-
-          {/* Barista */}
-          <div className="service-card">
-            <i data-feather="coffee" className="service-icon"></i>
-            <h3>Barista</h3>
-            <p>
-              Dalam dua bulan perjalanan sebagai barista, saya fokus menjaga
-              konsistensi rasa dan kualitas visual latte art. Meski tergolong
-              singkat, progres ini menjadi pencapaian pribadi bagi saya karena
-              mampu menguasai teknik dan komposisi menu secara cepat dan
-              presisi.
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Barista Experience",
-                  "Pencapaian dalam 2 Bulan:\n• Hafal 15+ resep beverage (Espresso & Non-Coffee) secara presisi.\n• Menguasai teknik milk steaming untuk texture yang halus.\n• Mahir membuat basic latte art (Pattern Love) untuk standar sajian.",
-                )
-              }
-            >
-              Learn More
-            </a>
-          </div>
-
-          {/* Hospitality */}
-          <div className="service-card">
-            <i data-feather="user-check" className="service-icon"></i>
-            <h3>Hospitality</h3>
-            <p>
-              Memiliki pengalaman operasional yang kuat di bagian F&B Service.
-              Terbiasa menangani Guest Service secara langsung, efisiensi Room
-              Service, hingga koordinasi tim di bagian Banquet. Komitmen saya
-              adalah memberikan pelayanan yang cepat, ramah, dan sesuai standar
-              hospitality
-            </p>
-            <a
-              href="#!"
-              className="service-cta"
-              onClick={(e) =>
-                openServiceModal(
-                  e,
-                  "Hospitality & F&B Service",
-                  "Detail Pengalaman:\n• Waiter: Menangani guest relations dan table setup.\n• Room Service: Delivering food & service dengan standar privasi tamu.\n• Banquet: Berpengalaman melayani event berskala besar (Wedding/Gala).",
-                )
-              }
-            >
-              Learn More
-            </a>
-          </div>
+              {group.title}
+            </button>
+          ))}
         </div>
+        <section className="service-group">
+          <div className="service-cards-container">
+            {currentServiceGroup.items.map((item) => (
+              <div key={item.title} className="service-card">
+                <i data-feather={item.icon} className="service-icon"></i>
+                <h4>{item.title}</h4>
+                <p>{item.summary}</p>
+                <a
+                  href="#!"
+                  className="service-cta"
+                  onClick={(e) => openServiceModal(e, item.title, item.detail)}
+                >
+                  Learn More
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
       </section>
 
       {/* PROJECT */}
@@ -632,10 +582,13 @@ function App() {
               alt="Project: Portofolio Web UI"
               className="project-card-img"
             />
-            <h3 className="project-card-title">Project: Personal Web Presence</h3>
+            <h3 className="project-card-title">
+              Project: Personal Web Presence
+            </h3>
             <p className="project-card-description">
-              Website presentasi personal yang dirancang untuk menampilkan karya,
-              layanan, dan identitas kerja secara lebih terstruktur dan modern.
+              Website presentasi personal yang dirancang untuk menampilkan
+              karya, layanan, dan identitas kerja secara lebih terstruktur dan
+              modern.
             </p>
             <a href="#home" className="project-link">
               View Case <i data-feather="arrow-right"></i>
@@ -732,7 +685,10 @@ function App() {
                 </div>
 
                 <div className="pdf-modal-footer">
-                  <p>Preview mode is optimized for reading across desktop, tablet, and mobile.</p>
+                  <p>
+                    Preview mode is optimized for reading across desktop,
+                    tablet, and mobile.
+                  </p>
                   <div className="pdf-modal-footer-actions">
                     <a href="#contact" className="cta" onClick={closeModal}>
                       Discuss Similar Work

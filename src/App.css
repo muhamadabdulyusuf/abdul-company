@@ -409,11 +409,76 @@ body {
 /* SERVICE SECTION (Card Layout) */
 /* ========================================= */
 
+.service-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  margin-top: 3.2rem;
+  margin-bottom: 1.3rem;
+}
+
+.service-tab {
+  padding: 0.9rem 1.15rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(236, 244, 255, 0.78);
+  font-size: 0.96rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.service-tab:hover {
+  border-color: rgba(0, 180, 255, 0.26);
+  color: var(--secondary);
+}
+
+.service-tab.active {
+  background: rgba(0, 180, 255, 0.12);
+  border-color: rgba(0, 180, 255, 0.3);
+  color: #dff6ff;
+  box-shadow: 0 10px 30px rgba(0, 180, 255, 0.12);
+}
+
+.service-group {
+  padding: clamp(1.35rem, 2.8vw, 2rem);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(12, 28, 49, 0.88), rgba(8, 20, 37, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.service-group-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: end;
+  margin-bottom: 1.75rem;
+}
+
+.service-group-header h3 {
+  font-size: clamp(1.35rem, 2.2vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--secondary);
+}
+
+.service-group-header p {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 0.98rem;
+}
+
 .service-cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin-top: 4rem;
+  margin-top: 0;
 }
 
 .service-card {
@@ -447,10 +512,12 @@ body {
   height: 100%;
 }
 
-.service-card h3 {
-  font-size: 1.6rem;
+.service-card h3,
+.service-card h4 {
+  font-size: 1.45rem;
   color: var(--secondary);
   margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
 }
 
 .service-card p {
@@ -1211,6 +1278,29 @@ body {
     grid-template-columns: 1fr;
     gap: 1.25rem;
     margin-top: 2.5rem;
+  }
+
+  .service-tabs {
+    gap: 0.75rem;
+    margin-top: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-group {
+    padding: 1.2rem;
+    border-radius: 22px;
+  }
+
+  .service-tab {
+    width: 100%;
+    text-align: left;
+    border-radius: 18px;
+  }
+
+  .service-group-header {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
   }
 
   .service-card,
