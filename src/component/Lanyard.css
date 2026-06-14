@@ -2,12 +2,10 @@
 
 .lanyard-wrapper {
   /* background-color: yellowgreen; */
- width: 100%; 
-    height: 100vh;
-  display: flexbox; /* Tinggi yang kita sepakati */
+  width: 100%;
+  height: 100vh;
   justify-content: right;
   align-items: right;
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
 
@@ -22,6 +20,6 @@
 
 @media (max-width: 768px) {
     .lanyard-wrapper {
-        height: 50vh; /* Contoh: hanya setengah layar di mobile */
+        display: none;
     }
 }

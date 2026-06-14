@@ -1,21 +1,13 @@
-// ====================== IMPORTS ======================
 import { useEffect, useRef, useState } from "react";
 
-// Pastikan path dan file ini ada di folder Anda
 import "./App.css";
 import logoImage from "./assets/ABDUL_COMPANY.png";
 import handbookCoverImage from "./assets/cover-handbook.png";
 import inventoryImage from "./assets/excel.jpg";
 import projectImage from "./assets/squre.jpg";
 
-// Komponen custom (Pastikan file-file ini ada di folder './component')
-import FallingText from "./component/FallingText";
-import Lanyard from "./component/Lanyard";
-import LogoLoop from "./component/LogoLoop";
 import PdfPreview from "./component/PdfPreview";
-import ScrollReveal from "./component/ScrollReveal";
 
-// Library Icons
 import {
   SiGithub,
   SiGmail,
@@ -24,130 +16,114 @@ import {
   SiTiktok,
   SiWhatsapp,
 } from "react-icons/si";
-// Icon untuk Form Status
-import { FiAlertCircle, FiCheckCircle, FiLoader } from "react-icons/fi";
+import {
+  FiAlertCircle,
+  FiArrowRight,
+  FiCheckCircle,
+  FiExternalLink,
+  FiFileText,
+  FiLoader,
+  FiMail,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
 
-// ====================== DATA ======================
-const techLogos = [
+const ARTHA_SYSTEM_URL = "https://artha-system.vercel.app";
+const DRIVE_PROJECT_URL =
+  "https://drive.google.com/drive/folders/1QEbfEMCTRlQiKwlsjx_VY4u_67QaNotp?usp=drive_link";
+
+const socialLinks = [
   {
-    node: <SiWhatsapp />,
-    title: "WhatsApp Communication",
+    icon: <SiWhatsapp />,
+    label: "WhatsApp",
     href: "https://wa.me/6282320681141",
   },
   {
-    node: <SiInstagram />,
-    title: "Instagram Management",
+    icon: <SiInstagram />,
+    label: "Instagram",
     href: "https://www.instagram.com/ab_duullll/",
   },
   {
-    node: <SiTiktok />,
-    title: "TikTok Content",
+    icon: <SiTiktok />,
+    label: "TikTok",
     href: "https://www.tiktok.com/@abdul.yusuf_va?lang=en-GB",
   },
   {
-    node: <SiLinkedin />,
-    title: "LinkedIn Outreach",
+    icon: <SiLinkedin />,
+    label: "LinkedIn",
     href: "https://www.linkedin.com/in/muhamad-abdul-yusuf-b862b7374/",
   },
   {
-    node: <SiGmail />,
-    title: "Gmail Management",
+    icon: <SiGmail />,
+    label: "Email",
     href: "mailto:muhaamdabdulyusuf73@gmail.com",
   },
   {
-    node: <SiGithub />,
-    title: "GitHub",
+    icon: <SiGithub />,
+    label: "GitHub",
     href: "https://github.com/muhamadabdulyusuf",
   },
 ];
 
-const serviceGroups = [
+const purposeCards = [
   {
-    title: "Food & Beverage Service & Guest Experience",
+    title: "Merawat Jejak",
     description:
-      "Kemampuan yang berangkat dari pengalaman lapangan, pelayanan tamu, dan ritme kerja operasional yang menuntut presisi serta konsistensi.",
-    items: [
-      {
-        icon: "user-check",
-        title: "Food & Beverage Service",
-        summary:
-          "Berpengalaman menangani guest service, room service, dan support banquet dengan standar hospitality yang rapi dan responsif.",
-        detail:
-          "Detail Pengalaman:\n• Waiter: Menangani guest relations dan table setup.\n• Room Service: Delivering food & service dengan standar privasi tamu.\n• Banquet: Berpengalaman melayani event berskala besar (Wedding/Gala).",
-      },
-      {
-        icon: "coffee",
-        title: "Barista",
-        summary:
-          "Fokus pada konsistensi rasa, kecepatan kerja, dan kualitas visual sajian dalam operasional beverage sehari-hari.",
-        detail:
-          "Pencapaian dalam 2 Bulan:\n• Hafal 15+ resep beverage (Espresso & Non-Coffee) secara presisi.\n• Menguasai teknik milk steaming untuk texture yang halus.\n• Mahir membuat basic latte art (Pattern Love) untuk standar sajian.",
-      },
-    ],
+      "Setiap karya punya asal-usul. Abdul Company mencatat prosesnya agar perjalanan tidak hilang setelah hasilnya selesai.",
   },
   {
-    title: "Administrative & Office Skills",
+    title: "Menguji Bentuk",
     description:
-      "Dibangun untuk mendukung alur kerja internal agar lebih tertata, efisien, dan mudah dijalankan dalam kebutuhan operasional harian.",
-    items: [
-      {
-        icon: "mail",
-        title: "Email Management",
-        summary:
-          "Mengelola inbox, menyusun draft profesional, dan memfilter prioritas komunikasi agar arus kerja tetap terjaga.",
-        detail:
-          "• Memfilter email masuk berdasarkan prioritas.\n• Menyusun draf balasan profesional untuk klien.\n• Membersihkan spam dan mengorganisir folder arsip.",
-      },
-      {
-        icon: "layers",
-        title: "Microsoft Office",
-        summary:
-          "Mahir menggunakan Word, Excel, dan PowerPoint untuk kebutuhan dokumen, laporan, serta presentasi kerja.",
-        detail:
-          "• Excel: Pembuatan laporan keuangan, pivot table, dan otomasi data.\n• Word: Pembuatan surat resmi, proposal, dan dokumen bisnis.\n• PPT: Desain slide presentasi yang clean dan profesional.",
-      },
-      {
-        icon: "clipboard",
-        title: "Administrative",
-        summary:
-          "Mendukung pekerjaan administratif mulai dari data entry, pengarsipan digital, hingga penjadwalan harian.",
-        detail:
-          "• Data Entry: Input data cepat dengan akurasi tinggi.\n• Calendar Management: Mengatur jadwal meeting dan pengingat harian.\n• Digital Filing: Pengarsipan dokumen cloud yang sistematis.",
-      },
-    ],
+      "Project yang tumbuh akan diuji pelan-pelan sampai cukup matang untuk berdiri sebagai brand sendiri.",
   },
   {
-    title: "Creative & Digital Skills",
+    title: "Menjaga Kejujuran",
     description:
-      "Digunakan untuk membentuk komunikasi visual yang lebih jelas, konsisten, dan relevan untuk kebutuhan personal maupun bisnis.",
-    items: [
-      {
-        icon: "pen-tool",
-        title: "Design",
-        summary:
-          "Membuat visual yang rapi dan komunikatif untuk kebutuhan presentasi, promosi, dan materi pendukung brand.",
-        detail:
-          "• Social Media Graphics: Desain feed dan story Instagram yang estetik.\n• Presentation Design: Slide PowerPoint/Canva yang profesional.\n• Branding: Pembuatan aset visual sederhana untuk identitas bisnis.",
-      },
-      {
-        icon: "share-2",
-        title: "Social Media Management",
-        summary:
-          "Mengelola kehadiran digital melalui perencanaan konten, interaksi audiens, dan monitoring performa.",
-        detail:
-          "• Content Planning: Membuat kalender konten mingguan.\n• Audience Interaction: Merespons komentar dan DM secara profesional.\n• Analytics: Memantau pertumbuhan followers dan engagement.",
-      },
-    ],
+      "Yang ditampilkan harus punya konteks, proses, atau bukti. Tidak perlu terlihat besar sebelum waktunya.",
+  },
+  {
+    title: "Lintas Bidang",
+    description:
+      "Bidangnya boleh berubah: system, hospitality, F&B, creative, digital product, atau clothing. Yang dijaga adalah arahnya.",
   },
 ];
 
-// ====================== CONTACT FORM ======================
+const principles = [
+  "Rapi",
+  "Jujur",
+  "Tumbuh",
+  "Fungsional",
+  "Elegant",
+  "Disiplin",
+  "Trustworthy",
+  "Kolaboratif",
+];
+
+const archiveProjects = [
+  {
+    title: "Handbook by Ari",
+    label: "Document case",
+    image: handbookCoverImage,
+    description:
+      "Handbook ini menjadi catatan bahwa informasi yang rapi bisa mengubah pengetahuan sederhana menjadi pegangan kerja.",
+    action: "Preview PDF",
+    type: "preview",
+  },
+  {
+    title: "Abdul Company Website",
+    label: "Parent brand home",
+    image: projectImage,
+    description:
+      "Website ini adalah fondasi rumah induk: tempat karya, arsip, eksperimen, dan brand kecil disusun agar punya arah.",
+    action: "View site",
+    href: "#home",
+  },
+];
+
 function ContactForm() {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Kunci Akses Web3Forms diambil dari .env.local
-  // VARIABEL INI HARUS ADA DI .env LOKAL DAN DI KONFIGURASI VERCEL
   const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
   const FALLBACK_EMAIL = "muhaamdabdulyusuf73@gmail.com";
   const isWeb3FormsReady = Boolean(ACCESS_KEY);
@@ -162,14 +138,14 @@ function ContactForm() {
       const email = form.email.value.trim();
       const message = form.message.value.trim();
       const subject = encodeURIComponent(
-        `Inquiry from ${name || "Website Visitor"}`,
+        `Abdul Company inquiry from ${name || "Website Visitor"}`,
       );
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       );
 
       window.location.href = `mailto:${FALLBACK_EMAIL}?subject=${subject}&body=${body}`;
-      setResult("Mail Draft Opened Successfully!");
+      setResult("Email Draft Ready");
       setIsSubmitting(false);
       setTimeout(() => setResult(""), 5000);
       return;
@@ -179,7 +155,7 @@ function ContactForm() {
 
     const formData = new FormData(event.target);
     formData.append("access_key", ACCESS_KEY);
-    formData.append("subject", "Pesan Baru dari Portofolio Web Abdul");
+    formData.append("subject", "Pesan Baru dari Abdul Company");
     formData.append("botcheck", "");
 
     try {
@@ -203,54 +179,65 @@ function ContactForm() {
     }
   };
 
+  const isSuccessfulResult =
+    result.includes("Success") || result.includes("Ready");
+
   return (
     <form onSubmit={onSubmit} className="contact-form">
-      <input
-        type="text"
-        name="name"
-        placeholder="Nama Anda"
-        required
-        disabled={isSubmitting}
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email Anda"
-        required
-        disabled={isSubmitting}
-      />
-      <textarea
-        name="message"
-        placeholder="Pesan Anda"
-        required
-        disabled={isSubmitting}
-      ></textarea>
+      <label>
+        Nama
+        <input
+          type="text"
+          name="name"
+          placeholder="Nama lo"
+          required
+          disabled={isSubmitting}
+        />
+      </label>
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          placeholder="email@domain.com"
+          required
+          disabled={isSubmitting}
+        />
+      </label>
+      <label>
+        Pesan
+        <textarea
+          name="message"
+          placeholder="Tulis konteksnya: project, brand, masalah, atau bentuk kolaborasi yang lagi lo pikirkan..."
+          required
+          disabled={isSubmitting}
+        ></textarea>
+      </label>
 
       <button type="submit" disabled={isSubmitting} className="submit-btn">
         {isSubmitting ? (
           <>
-            <FiLoader className="loading-icon" /> Mengirim...
+            <FiLoader className="loading-icon" /> Mengirim
           </>
-        ) : !isWeb3FormsReady ? (
-          "Open Email Draft"
         ) : (
-          "Submit Form"
+          <>
+            <FiMail /> {isWeb3FormsReady ? "Kirim Pesan" : "Buka Draft Email"}
+          </>
         )}
       </button>
 
       {!isWeb3FormsReady && (
         <p className="contact-form-note">
-          Web form belum dikonfigurasi. Untuk sementara tombol ini akan membuka
-          draft email ke Abdul Company.
+          Pesan akan dibuka sebagai draft email, supaya obrolan pertama tetap
+          punya jejak yang jelas.
         </p>
       )}
 
-      {/* Menampilkan status dengan icon yang lebih visual */}
       {result && result !== "Sending...." && (
         <span
-          className={`form-status ${result.includes("Success") ? "success" : "error"}`}
+          className={`form-status ${isSuccessfulResult ? "success" : "error"}`}
         >
-          {result.includes("Success") ? <FiCheckCircle /> : <FiAlertCircle />}{" "}
+          {isSuccessfulResult ? <FiCheckCircle /> : <FiAlertCircle />}{" "}
           {result}
         </span>
       )}
@@ -258,109 +245,60 @@ function ContactForm() {
   );
 }
 
-// ====================== APP ======================
 function App() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const [activeModal, setActiveModal] = useState(null);
-  const [activeServiceGroup, setActiveServiceGroup] = useState(
-    serviceGroups[0].title,
-  );
 
   const navbarRef = useRef(null);
   const hamburgerRef = useRef(null);
-  const searchInputRef = useRef(null);
-  const currentServiceGroup =
-    serviceGroups.find((group) => group.title === activeServiceGroup) ||
-    serviceGroups[0];
 
-  const openServiceModal = (e, title, detail) => {
-    e.preventDefault();
-    setActiveModal({ type: "service", title, detail });
-  };
+  const closeModal = () => setActiveModal(null);
 
-  const openPdfPreview = (e) => {
-    e.preventDefault();
+  const openPdfPreview = (event) => {
+    event.preventDefault();
     setActiveModal({
       type: "pdf",
       title: "Handbook by Ari",
-      detail: "",
+      detail: "Catatan dokumen dari arsip kerja Abdul Company.",
       pdfSrc: "/documents/handbook.pdf",
     });
   };
 
-  const closeModal = () => setActiveModal(null);
-
-  const handleHamburgerClick = () => {
-    setIsNavbarOpen((prev) => !prev);
-    if (isSearchVisible) setIsSearchVisible(false);
-  };
-
-  const handleSearchClick = (e) => {
-    e.preventDefault();
-    if (isSearchVisible && searchTerm.length > 0) {
-      handleSearchSubmit(e);
-      return;
-    }
-    setIsSearchVisible(true);
-    setSearchTerm("");
-    if (isNavbarOpen) setIsNavbarOpen(false);
-    setTimeout(() => searchInputRef.current?.focus(), 50);
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    setIsSearchVisible(false);
-    setSearchTerm("");
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const closeNavbar = () => setIsNavbarOpen(false);
 
   useEffect(() => {
-    if (window.feather) {
-      window.feather.replace();
-    }
-
     const handleOutsideClick = (event) => {
       const isClickOnHamburger = hamburgerRef.current?.contains(event.target);
       const isClickOnNavbar = navbarRef.current?.contains(event.target);
-      const isClickOnSearchIcon = event.target.closest("#search");
-      const isClickOnSearchForm = searchInputRef.current
-        ?.closest(".search-form")
-        ?.contains(event.target);
 
-      if (isSearchVisible && !isClickOnSearchForm && !isClickOnSearchIcon) {
-        setIsSearchVisible(false);
-        setSearchTerm("");
-      }
-      if (!isClickOnNavbar && !isClickOnHamburger && !isClickOnSearchIcon) {
+      if (!isClickOnNavbar && !isClickOnHamburger) {
         setIsNavbarOpen(false);
       }
     };
 
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
-  }, [isNavbarOpen, isSearchVisible]);
+  }, []);
 
   useEffect(() => {
-    const handleGlobalKeyDown = (e) => {
-      if (e.key === "Enter" && isSearchVisible) handleSearchSubmit(e);
-      if (e.key === "Escape" && activeModal) closeModal();
+    const handleGlobalKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeModal();
+        closeNavbar();
+      }
 
       const isPreviewShortcut =
-        (e.ctrlKey || e.metaKey) && ["s", "p"].includes(e.key.toLowerCase());
+        (event.ctrlKey || event.metaKey) &&
+        ["s", "p"].includes(event.key.toLowerCase());
 
       if (activeModal?.type === "pdf" && isPreviewShortcut) {
-        e.preventDefault();
+        event.preventDefault();
       }
     };
 
     document.addEventListener("keydown", handleGlobalKeyDown);
     return () => document.removeEventListener("keydown", handleGlobalKeyDown);
-  }, [activeModal, isSearchVisible]);
+  }, [activeModal]);
 
   useEffect(() => {
     if (!activeModal) return undefined;
@@ -375,338 +313,308 @@ function App() {
 
   return (
     <>
-      {/* NAVBAR */}
-      <div className="navbar">
-        <div className="logo">
-          <img
-            src={logoImage}
-            className="navbar-logo"
-            alt="Logo Abdul Company"
-          />
-          <a className="navbar-logo-text" href="#home">
-            abdul
-          </a>
-        </div>
-        <div
+      <header className="site-header">
+        <a className="brand-link" href="#home" onClick={closeNavbar}>
+          <img src={logoImage} alt="Abdul Company" />
+          <span>Abdul Company</span>
+        </a>
+
+        <nav
           ref={navbarRef}
-          className={`navbar-nav ${isNavbarOpen ? "active" : ""}`}
+          className={`site-nav ${isNavbarOpen ? "active" : ""}`}
+          aria-label="Primary navigation"
         >
-          <a href="#home">Home</a>
-          <a href="#about">About Me</a>
-          <a href="#service">Service</a>
-          <a href="#project">Project</a>
-        </div>
-        <div className="navbar-extra">
-          <div className={`search-form ${isSearchVisible ? "active" : ""}`}>
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Cari..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-          <a href="#" id="search" onClick={handleSearchClick}>
-            <i data-feather="search"></i>
+          <a href="#purpose" onClick={closeNavbar}>
+            Purpose
+          </a>
+          <a href="#work" onClick={closeNavbar}>
+            Work
+          </a>
+          <a href="#vision" onClick={closeNavbar}>
+            Direction
+          </a>
+          <a href="#contact" onClick={closeNavbar}>
+            Contact
+          </a>
+        </nav>
+
+        <div className="header-actions">
+          <a
+            className="header-product-link"
+            href={ARTHA_SYSTEM_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Artha System <FiExternalLink />
           </a>
           <button
             ref={hamburgerRef}
-            className="hamburger-btn"
-            onClick={handleHamburgerClick}
+            type="button"
+            className="menu-button"
+            aria-label="Toggle navigation"
+            aria-expanded={isNavbarOpen}
+            onClick={() => setIsNavbarOpen((prev) => !prev)}
           >
-            <i data-feather="menu"></i>
+            {isNavbarOpen ? <FiX /> : <FiMenu />}
           </button>
         </div>
-      </div>
+      </header>
 
-      {/* HERO */}
-      <section className="hero" id="home">
-        <main className="content">
-          <span className="hero-eyebrow">
-            Abdul Company Creative Laboratory
-          </span>
-          <h1>
-            Tempat kerja yang <span>tenang, rapi, dan terus bertumbuh.</span>
-          </h1>
-          <p>
-            Abdul Company adalah ruang tempat karya, sistem, dan kolaborasi saya
-            disusun dengan pendekatan yang bersih, fungsional, dan profesional.
-          </p>
-          <div className="hero-actions">
-            <a href="#project" className="cta">
-              View Selected Work
-            </a>
+      <main>
+        <section className="hero" id="home">
+          <div className="hero-content">
+            <p className="eyebrow">Founder-led creative studio in progress</p>
+            <h1>Tempat karya bertumbuh sebelum menemukan bentuk besarnya.</h1>
+            <p className="hero-copy">
+              Abdul Company adalah ruang induk untuk merawat proses: mencatat
+              yang sedang dibangun, menguji gagasan di dunia nyata, lalu
+              memberi tempat bagi project seperti Artha System untuk tumbuh
+              menjadi brand yang utuh.
+            </p>
+            <div className="hero-actions">
+              <a className="button primary" href="#work">
+                Lihat Jejak Karya <FiArrowRight />
+              </a>
+              <a
+                className="button secondary"
+                href={ARTHA_SYSTEM_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Buka Artha System <FiExternalLink />
+              </a>
+            </div>
           </div>
-        </main>
-      </section>
 
-      <div className="lanyard-wrapper">
-        <Lanyard />
-      </div>
-
-      {/* ABOUT */}
-      <section id="about" className="about">
-        <h2>
-          About <span>Me</span>
-        </h2>
-        <p className="section-intro">
-          Abdul Company saya bangun sebagai ruang kerja yang mendokumentasikan
-          proses, sistem, dan hasil nyata dari tiap proyek yang saya tangani.
-        </p>
-        <div className="about-row">
-          <div className="about-content">
-            <ScrollReveal
-              baseOpacity={0.1}
-              enableBlur={0}
-              baseRotation={0}
-              blurStrength={0.2}
-            >
-              Hai! Saya Muhamad Abdul Yusuf. Berpengalaman di dunia hospitality,
-              berangkat dari Food & Beverage Service. Suka kerja yang dinamis,
-              ketemu banyak orang, dan kasih pelayanan yang bikin tamu merasa
-              nyaman dan puas. Selain itu, saya juga jalanin kerjaan sebagai
-              Virtual Assistant. Biasanya bantu ngatur jadwal, bikin dokumen,
-              riset, atau tugas-tugas ringan lainnya.
-            </ScrollReveal>
+          <div className="hero-status" aria-label="Abdul Company direction">
+            <div>
+              <span>Yang dijaga</span>
+              <strong>Jejak karya</strong>
+            </div>
+            <div>
+              <span>Bentuk pertama</span>
+              <strong>Artha System</strong>
+            </div>
+            <div>
+              <span>Arah berikutnya</span>
+              <strong>Studio brand kecil</strong>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* SERVICE */}
-      <section id="service" className="service">
-        <h2>
-          What I Bring <span>to Your Table</span>
-        </h2>
-        <p className="section-intro">
-          Fokus saya adalah membuat alur kerja lebih ringan, lebih rapi, dan
-          lebih siap dipakai dalam kebutuhan operasional sehari-hari.
-        </p>
-        <div className="demo">
-          <FallingText
-            text={
-              "Email Management Administrative Sosial Media Management Excel Word Power Point Hospitality Food and Beverage Service Barista"
-            }
-            highlightWords={["..."]}
-            highlightClass="highlighted"
-            trigger="hover"
-            backgroundColor="transparent"
-            gravity={0.56}
-            mouseConstraintStiffness={0.9}
-          />
-        </div>
-        <div className="service-tabs">
-          {serviceGroups.map((group) => (
-            <button
-              key={group.title}
-              type="button"
-              className={`service-tab ${group.title === currentServiceGroup.title ? "active" : ""}`}
-              onClick={() => setActiveServiceGroup(group.title)}
-            >
-              {group.title}
-            </button>
-          ))}
-        </div>
-        <section className="service-group">
-          <div className="service-cards-container">
-            {currentServiceGroup.items.map((item) => (
-              <div key={item.title} className="service-card">
-                <i data-feather={item.icon} className="service-icon"></i>
-                <h4>{item.title}</h4>
-                <p>{item.summary}</p>
-                <a
-                  href="#!"
-                  className="service-cta"
-                  onClick={(e) => openServiceModal(e, item.title, item.detail)}
-                >
-                  Learn More
-                </a>
-              </div>
+        <section className="purpose section-shell" id="purpose">
+          <div className="section-heading">
+            <p className="eyebrow">Purpose</p>
+            <h2>Bukan panggung untuk terlihat besar. Ini ruang untuk bertumbuh dengan arah.</h2>
+            <p>
+              Fokus utamanya adalah dokumentasi perjalanan. Dari sana, setiap
+              project bisa menemukan bentuknya sendiri tanpa kehilangan asalnya.
+            </p>
+          </div>
+
+          <div className="purpose-grid">
+            {purposeCards.map((card) => (
+              <article key={card.title} className="purpose-card">
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="principles-strip" aria-label="Brand principles">
+            {principles.map((principle) => (
+              <span key={principle}>{principle}</span>
             ))}
           </div>
         </section>
-      </section>
 
-      {/* PROJECT */}
-      <section id="project" className="project">
-        <h2>
-          My Recent <span>Work</span>
-        </h2>
-        <p className="project-subheading">
-          Beberapa proyek dan hasil kerja yang menunjukkan keahlian saya.
-        </p>
-        <div className="project-row">
-          <div className="project-card">
-            <img
-              src={inventoryImage}
-              alt="Project: Inventory Management"
-              className="project-card-img"
-            />
-            <h3 className="project-card-title">
-              Project: Inventory Management
-            </h3>
-            <p className="project-card-description">
-              Sistem inventaris otomatis yang memangkas proses manual. Input
-              data penjualan, sistem menghitung sisa stok dan bahan baku secara
-              real-time menggunakan formula Excel.
+        <section className="work section-shell" id="work">
+          <div className="section-heading split">
+            <div>
+              <p className="eyebrow">My Recent Work</p>
+              <h2>Bukti lebih dulu. Cerita menyusul dengan tenang.</h2>
+            </div>
+            <p>
+              Untuk sekarang, bagian ini adalah pusat Abdul Company. Tiap karya
+              tidak hanya dipajang, tapi dicatat sebagai jejak keputusan,
+              percobaan, dan keberanian untuk mulai.
             </p>
-            <a
-              href="https://drive.google.com/drive/folders/1QEbfEMCTRlQiKwlsjx_VY4u_67QaNotp?usp=drive_link"
-              className="project-link"
-            >
-              Download Now <i data-feather="arrow-right"></i>
-            </a>
           </div>
-          <div className="project-card">
-            <img
-              src={handbookCoverImage}
-              alt="Project: Internal Comms Hub"
-              className="project-card-img"
-            />
-            <h3 className="project-card-title">Project: Handbook by Ari</h3>
-            <p className="project-card-description">
-              Company handbook dalam format PDF dengan layout yang rapi untuk
-              kebutuhan operasional, panduan internal, dan referensi kerja
-              harian.
-            </p>
-            <a
-              href="#preview"
-              className="project-link"
-              onClick={openPdfPreview}
-            >
-              Preview <i data-feather="arrow-right"></i>
-            </a>
-          </div>
-          <div className="project-card">
-            <img
-              src={projectImage}
-              alt="Project: Portofolio Web UI"
-              className="project-card-img"
-            />
-            <h3 className="project-card-title">
-              Project: Personal Web Presence
-            </h3>
-            <p className="project-card-description">
-              Website presentasi personal yang dirancang untuk menampilkan
-              karya, layanan, dan identitas kerja secara lebih terstruktur dan
-              modern.
-            </p>
-            <a href="#home" className="project-link">
-              View Case <i data-feather="arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="contact">
-        <h2>
-          Get In <span>Touch</span>
-        </h2>
-        <p className="contact-subheading">
-          Jika kamu ingin membahas kolaborasi, sistem kerja, atau kebutuhan
-          dokumen tertentu, kirimkan pesan melalui formulir di bawah ini.
-        </p>
-        <div className="contact-form-container">
-          <ContactForm />
-        </div>
-      </section>
+          <article className="featured-work">
+            <div className="featured-media">
+              <img src={inventoryImage} alt="Artha System inventory project" />
+              <div className="live-badge">Live product</div>
+            </div>
+            <div className="featured-copy">
+              <p className="eyebrow">Owned brand / Inventory system</p>
+              <h3>Artha System</h3>
+              <p>
+                Artha System lahir dari kebutuhan untuk membuat operasional
+                lebih sadar terhadap datanya sendiri. Ia bukan hanya menghitung
+                stok, tapi membaca ritme kerja: kapan harus PO, apa yang perlu
+                didorong, dan keputusan apa yang sebaiknya dibuat sebelum
+                masalah terlihat.
+              </p>
+              <div className="feature-points">
+                <span>Inventory control</span>
+                <span>Worksheet</span>
+                <span>Operational monitoring</span>
+              </div>
+              <div className="work-actions">
+                <a
+                  className="button primary"
+                  href={ARTHA_SYSTEM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Buka live site <FiExternalLink />
+                </a>
+                <a
+                  className="button ghost"
+                  href={DRIVE_PROJECT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Buka arsip <FiArrowRight />
+                </a>
+              </div>
+            </div>
+          </article>
 
-      {/* FOOTER */}
+          <div className="archive-grid">
+            {archiveProjects.map((project) => (
+              <article key={project.title} className="archive-card">
+                <img src={project.image} alt={project.title} />
+                <div>
+                  <span>{project.label}</span>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  {project.type === "preview" ? (
+                    <a href="#preview" onClick={openPdfPreview}>
+                      <FiFileText /> {project.action}
+                    </a>
+                  ) : (
+                    <a href={project.href}>
+                      {project.action} <FiArrowRight />
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="vision section-shell" id="vision">
+          <div className="vision-copy">
+            <p className="eyebrow">Direction</p>
+            <h2>Yang dicari bukan riuh. Yang dibangun adalah arah.</h2>
+            <p>
+              Satu tahun ke depan, Abdul Company diarahkan menjadi rumah yang
+              lebih tertata: tempat project diuji, brand kecil dirawat, client
+              dipilih dengan cocok, dan partner dibangun dengan nilai yang
+              sejalan.
+            </p>
+          </div>
+          <div className="vision-grid">
+            <div>
+              <strong>03</strong>
+              <span>project aktif</span>
+            </div>
+            <div>
+              <strong>05</strong>
+              <span>brand kecil</span>
+            </div>
+            <div>
+              <strong>01</strong>
+              <span>company profile</span>
+            </div>
+            <div>
+              <strong>+</strong>
+              <span>client dan partner</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="contact section-shell" id="contact">
+          <div className="contact-layout">
+            <div className="contact-copy">
+              <p className="eyebrow">Contact</p>
+              <h2>Percakapan yang baik biasanya dimulai dari konteks yang jujur.</h2>
+              <p>
+                Untuk project, dokumentasi, brand kecil, atau kolaborasi, kirim
+                pesan singkat tentang apa yang sedang lo bangun dan kenapa itu
+                penting. Dari sana, arah bisa dibaca lebih jernih.
+              </p>
+              <div className="social-row" aria-label="Social links">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <ContactForm />
+          </div>
+        </section>
+      </main>
+
       <footer className="footer">
-        <div
-          style={{
-            height: "50px",
-            width: "100%",
-            position: "relative",
-            overflow: "hidden",
-            marginBottom: "20px",
-          }}
-        >
-          <LogoLoop
-            logos={techLogos}
-            speed={60}
-            direction="left"
-            logoHeight={25}
-            gap={10}
-            hoverSpeed={0}
-            scaleOnHover={true}
-            fadeOut
-            fadeOutColor="#1A1A1A"
-            ariaLabel="Technology stack used"
-          />
+        <div>
+          <img src={logoImage} alt="Abdul Company" />
+          <span>Abdul Company</span>
         </div>
-        <p className="footer-title">Abdul Company</p>
-        <p className="footer-copy">
-          A working archive for selected systems, documents, and collaborative
-          outputs.
+        <p>
+          Personal brand yang sedang tumbuh menjadi creative studio untuk
+          karya yang terdokumentasi, brand kecil, dan kolaborasi yang punya
+          arah.
         </p>
-        <p>&copy; 2025 Muhamad Abdul Yusuf. All rights reserved.</p>
+        <p>(c) 2026 Muhamad Abdul Yusuf. All rights reserved.</p>
       </footer>
 
-      {/* MODAL COMPONENT */}
       {activeModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div
-            className={`modal-content ${activeModal.type === "pdf" ? "pdf-modal" : ""}`}
-            onClick={(e) => e.stopPropagation()}
+            className="modal-content pdf-modal"
+            onClick={(event) => event.stopPropagation()}
           >
             <button
-              className="close-modal"
+              type="button"
+              className="pdf-close-icon"
               onClick={closeModal}
               aria-label="Close preview"
             >
-              &times;
+              <FiX />
             </button>
 
-            {activeModal.type === "pdf" ? (
-              <>
-                <button
-                  type="button"
-                  className="pdf-close-icon"
-                  onClick={closeModal}
-                  aria-label="Close preview"
-                >
-                  &times;
-                </button>
-
-                <div className="pdf-modal-header">
-                  <div>
-                    <h3>{activeModal.title}</h3>
-                    <p>{activeModal.detail}</p>
-                  </div>
-                </div>
-
-                <div
-                  className="pdf-preview-shell"
-                  onContextMenu={(e) => e.preventDefault()}
-                  onDragStart={(e) => e.preventDefault()}
-                >
-                  <PdfPreview src={activeModal.pdfSrc} />
-                </div>
-
-                <div className="pdf-modal-footer">
-                  <p>
-                    Preview mode is optimized for reading across desktop,
-                    tablet, and mobile.
-                  </p>
-                  <div className="pdf-modal-footer-actions">
-                    <a href="#contact" className="cta" onClick={closeModal}>
-                      Discuss Similar Work
-                    </a>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
+            <div className="pdf-modal-header">
+              <div>
+                <p className="eyebrow">Archive preview</p>
                 <h3>{activeModal.title}</h3>
-                <div className="modal-body">
-                  <p style={{ whiteSpace: "pre-line" }}>{activeModal.detail}</p>
-                </div>
-                <a href="#contact" className="cta" onClick={closeModal}>
-                  Hire Me
-                </a>
-              </>
-            )}
+                <p>{activeModal.detail}</p>
+              </div>
+            </div>
+
+            <div
+              className="pdf-preview-shell"
+              onContextMenu={(event) => event.preventDefault()}
+              onDragStart={(event) => event.preventDefault()}
+            >
+              <PdfPreview src={activeModal.pdfSrc} />
+            </div>
+
+            <div className="pdf-modal-footer">
+              <p>Preview ini adalah bagian dari arsip kerja Abdul Company.</p>
+              <a className="button secondary" href="#contact" onClick={closeModal}>
+                Mulai percakapan <FiArrowRight />
+              </a>
+            </div>
           </div>
         </div>
       )}

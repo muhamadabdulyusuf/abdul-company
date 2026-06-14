@@ -23,15 +23,17 @@ const ScrollReveal = ({
   // ===== SPLIT TEXT & SET ALL WHITE =====
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : "";
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
+    const words = text.trim().split(/\s+/);
+
+    return words.map((word, index) => {
       return (
         <span
-          className="word"
+          className="scroll-word"
           key={index}
           style={{ color: "white" }} // semua kata putih
         >
           {word}
+          {index < words.length - 1 ? " " : ""}
         </span>
       );
     });
@@ -63,7 +65,7 @@ const ScrollReveal = ({
       }
     );
 
-    const wordElements = el.querySelectorAll(".word");
+    const wordElements = el.querySelectorAll(".scroll-word");
 
     // OPACITY ANIMATION
     gsap.fromTo(
