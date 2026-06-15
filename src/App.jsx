@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 
 import "./App.css";
+import founderImage from "./assets/1757928406747.png";
 import logoImage from "./assets/ABDUL_COMPANY.png";
-import handbookCoverImage from "./assets/cover-handbook.png";
 import inventoryImage from "./assets/excel.jpg";
-import projectImage from "./assets/squre.jpg";
+import planningImage from "./assets/service1.jpg";
+import notebookImage from "./assets/squre.jpg";
 
-import PdfPreview from "./component/PdfPreview";
-
+import {
+  FiAlertCircle,
+  FiArrowRight,
+  FiCheckCircle,
+  FiExternalLink,
+  FiLoader,
+  FiMail,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
 import {
   SiGithub,
   SiGmail,
@@ -16,17 +25,6 @@ import {
   SiTiktok,
   SiWhatsapp,
 } from "react-icons/si";
-import {
-  FiAlertCircle,
-  FiArrowRight,
-  FiCheckCircle,
-  FiExternalLink,
-  FiFileText,
-  FiLoader,
-  FiMail,
-  FiMenu,
-  FiX,
-} from "react-icons/fi";
 
 const ARTHA_SYSTEM_URL = "https://artha-system.vercel.app";
 const DRIVE_PROJECT_URL =
@@ -58,65 +56,144 @@ const socialLinks = [
     label: "Email",
     href: "mailto:muhaamdabdulyusuf73@gmail.com",
   },
+  // {
+  //   icon: <SiGithub />,
+  //   label: "GitHub",
+  //   href: "https://github.com/muhamadabdulyusuf",
+  // },
+];
+
+const purposeLines = [
   {
-    icon: <SiGithub />,
-    label: "GitHub",
-    href: "https://github.com/muhamadabdulyusuf",
+    number: "01",
+    title: "Yang dikerjain, disimpan jejaknya.",
+    description:
+      "Biar karya nggak cuma selesai, lewat, lalu hilang di folder. Ada tempat buat hasil, alasan, dan prosesnya.",
+  },
+  {
+    number: "02",
+    title: "Yang masih mentah, tetap boleh masuk.",
+    description:
+      "Ide nggak harus langsung kelihatan besar. Kadang cukup ditaruh dulu, diuji, lalu dibaca ulang saat waktunya tepat.",
+  },
+  {
+    number: "03",
+    title: "Yang tumbuh, bisa naik kelas.",
+    description:
+      "Kalau satu project makin jelas arahnya, dia bisa berdiri sebagai brand sendiri tanpa kehilangan asal ceritanya.",
+  },
+  {
+    number: "04",
+    title: "Yang beda bidang, tetap satu benang merah.",
+    description:
+      "Bidangnya boleh bebas. Standarnya tetap sama: rapi, jujur, berguna, dan bisa dipertanggungjawabkan.",
   },
 ];
 
-const purposeCards = [
+const heroTicker = [
+  "Yang dibangun",
+  "Yang dicatat",
+  "Yang diuji",
+  "Yang dirapikan",
+  "Yang mulai hidup",
+  "Yang siap tumbuh",
+  "Yang bisa diajak kerja",
+];
+
+const systemSignals = [
   {
-    title: "Merawat Jejak",
-    description:
-      "Setiap karya punya asal-usul. Abdul Company mencatat prosesnya agar perjalanan tidak hilang setelah hasilnya selesai.",
+    label: "PO Signal",
+    value: "Kapan harus beli lagi",
   },
   {
-    title: "Menguji Bentuk",
-    description:
-      "Project yang tumbuh akan diuji pelan-pelan sampai cukup matang untuk berdiri sebagai brand sendiri.",
+    label: "Upsell Cue",
+    value: "Barang mana yang perlu didorong",
   },
   {
-    title: "Menjaga Kejujuran",
-    description:
-      "Yang ditampilkan harus punya konteks, proses, atau bukti. Tidak perlu terlihat besar sebelum waktunya.",
-  },
-  {
-    title: "Lintas Bidang",
-    description:
-      "Bidangnya boleh berubah: system, hospitality, F&B, creative, digital product, atau clothing. Yang dijaga adalah arahnya.",
+    label: "Stock Health",
+    value: "Bagian mana yang mulai nggak sehat",
   },
 ];
 
-const principles = [
-  "Rapi",
-  "Jujur",
-  "Tumbuh",
-  "Fungsional",
-  "Elegant",
-  "Disiplin",
-  "Trustworthy",
-  "Kolaboratif",
-];
-
-const archiveProjects = [
+const workSlides = [
   {
-    title: "Handbook by Ari",
-    label: "Document case",
-    image: handbookCoverImage,
+    title: "Artha System",
+    eyebrow: "Produk sendiri / Inventory system",
+    label: "Sudah live",
+    image: inventoryImage,
+    number: "01",
     description:
-      "Handbook ini menjadi catatan bahwa informasi yang rapi bisa mengubah pengetahuan sederhana menjadi pegangan kerja.",
-    action: "Preview PDF",
-    type: "preview",
+      "Artha System lahir dari rasa gemas pada stok yang sering dianggap angka mati. Di sini, stok dibaca seperti sinyal: kapan beli lagi, barang mana yang layak didorong, dan keputusan apa yang jangan ditunda.",
+    points: ["Inventory control", "Worksheet", "Operational monitoring"],
+    signals: systemSignals,
+    primaryAction: {
+      label: "Buka live site",
+      href: ARTHA_SYSTEM_URL,
+      external: true,
+    },
+    secondaryAction: {
+      label: "Buka arsip",
+      href: DRIVE_PROJECT_URL,
+      external: true,
+    },
+    tone: "aqua",
   },
   {
-    title: "Abdul Company Website",
-    label: "Parent brand home",
-    image: projectImage,
+    title: "Ruang Rasa",
+    eyebrow: "Lorem concept / F&B direction",
+    label: "Concept draft",
+    image: planningImage,
+    number: "02",
     description:
-      "Website ini adalah fondasi rumah induk: tempat karya, arsip, eksperimen, dan brand kecil disusun agar punya arah.",
-    action: "View site",
-    href: "#home",
+      "Lorem ipsum yang gue bayangin sebagai catatan rasa: tempat ide menu, suasana ruang, dan ritme pelayanan dikumpulkan sebelum punya bentuk bisnis yang utuh.",
+    points: ["Menu note", "Hospitality", "Brand sketch"],
+    primaryAction: {
+      label: "Coming soon",
+      href: "#contact",
+    },
+    secondaryAction: {
+      label: "Catatan konsep",
+      href: "#purpose",
+    },
+    tone: "amber",
+  },
+  {
+    title: "Abdul Notes",
+    eyebrow: "Lorem archive / Personal documentation",
+    label: "In writing",
+    image: notebookImage,
+    number: "03",
+    description:
+      "Lorem ipsum buat ruang catatan: potongan proses, keputusan kecil, dan pelajaran yang belum tentu jadi brand, tapi tetap layak disimpan sebagai jejak.",
+    points: ["Journal", "Process log", "Working notes"],
+    primaryAction: {
+      label: "Coming soon",
+      href: "#contact",
+    },
+    secondaryAction: {
+      label: "Lihat arah",
+      href: "#vision",
+    },
+    tone: "violet",
+  },
+  {
+    title: "Forma Studio",
+    eyebrow: "Lorem concept / Creative direction",
+    label: "Exploration",
+    image: inventoryImage,
+    number: "04",
+    description:
+      "Lorem ipsum sebagai wadah eksplorasi visual: identitas, interface, dan sistem kecil yang nanti bisa berubah jadi layanan, produk, atau kolaborasi.",
+    points: ["Interface", "Identity", "Prototype"],
+    primaryAction: {
+      label: "Coming soon",
+      href: "#contact",
+    },
+    secondaryAction: {
+      label: "Mulai cerita",
+      href: "#contact",
+    },
+    tone: "coral",
   },
 ];
 
@@ -237,8 +314,7 @@ function ContactForm() {
         <span
           className={`form-status ${isSuccessfulResult ? "success" : "error"}`}
         >
-          {isSuccessfulResult ? <FiCheckCircle /> : <FiAlertCircle />}{" "}
-          {result}
+          {isSuccessfulResult ? <FiCheckCircle /> : <FiAlertCircle />} {result}
         </span>
       )}
     </form>
@@ -247,24 +323,16 @@ function ContactForm() {
 
 function App() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [activeModal, setActiveModal] = useState(null);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
 
   const navbarRef = useRef(null);
   const hamburgerRef = useRef(null);
-
-  const closeModal = () => setActiveModal(null);
-
-  const openPdfPreview = (event) => {
-    event.preventDefault();
-    setActiveModal({
-      type: "pdf",
-      title: "Handbook by Ari",
-      detail: "Catatan dokumen dari arsip kerja Abdul Company.",
-      pdfSrc: "/documents/handbook.pdf",
-    });
-  };
+  const activeWork = workSlides[activeWorkIndex];
 
   const closeNavbar = () => setIsNavbarOpen(false);
+  const goToWorkSlide = (index) => {
+    setActiveWorkIndex((index + workSlides.length) % workSlides.length);
+  };
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -283,33 +351,23 @@ function App() {
   useEffect(() => {
     const handleGlobalKeyDown = (event) => {
       if (event.key === "Escape") {
-        closeModal();
         closeNavbar();
-      }
-
-      const isPreviewShortcut =
-        (event.ctrlKey || event.metaKey) &&
-        ["s", "p"].includes(event.key.toLowerCase());
-
-      if (activeModal?.type === "pdf" && isPreviewShortcut) {
-        event.preventDefault();
       }
     };
 
     document.addEventListener("keydown", handleGlobalKeyDown);
     return () => document.removeEventListener("keydown", handleGlobalKeyDown);
-  }, [activeModal]);
+  }, []);
 
   useEffect(() => {
-    if (!activeModal) return undefined;
+    const intervalId = window.setInterval(() => {
+      setActiveWorkIndex(
+        (currentIndex) => (currentIndex + 1) % workSlides.length,
+      );
+    }, 6500);
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [activeModal]);
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   return (
     <>
@@ -362,42 +420,50 @@ function App() {
 
       <main>
         <section className="hero" id="home">
+          <div className="hero-wordmark" aria-hidden="true">
+            Abdul Company
+          </div>
+          <div className="hero-figure" aria-hidden="true">
+            <img src={founderImage} alt="" />
+          </div>
+          <div className="hero-note" aria-hidden="true">
+            <span>Field note 001</span>
+            <p>
+              Yang belum matang tidak dibuang. Dicatat dulu sampai ketemu
+              bentuk.
+            </p>
+          </div>
+
           <div className="hero-content">
-            <p className="eyebrow">Founder-led creative studio in progress</p>
-            <h1>Tempat karya bertumbuh sebelum menemukan bentuk besarnya.</h1>
+            <p className="eyebrow">
+              A journey of a thousand miles begins with a single step.
+            </p>
+            <h1>And Abdul Company is where that first step is taken.</h1>
             <p className="hero-copy">
-              Abdul Company adalah ruang induk untuk merawat proses: mencatat
-              yang sedang dibangun, menguji gagasan di dunia nyata, lalu
-              memberi tempat bagi project seperti Artha System untuk tumbuh
-              menjadi brand yang utuh.
+              Sebuah arsip hidup dan lab kecil untuk ide-ide yang menolak
+              berhenti sebagai draf. Tempat gue mencatat proses, menguji batas
+              sistem, dan membangun fondasi awal bagi brand-brand masa depan.
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#work">
-                Lihat Jejak Karya <FiArrowRight />
+                Lihat yang sudah hidup <FiArrowRight />
               </a>
-              <a
+              {/* <a
                 className="button secondary"
                 href={ARTHA_SYSTEM_URL}
                 target="_blank"
                 rel="noreferrer"
               >
                 Buka Artha System <FiExternalLink />
-              </a>
+              </a> */}
             </div>
           </div>
 
-          <div className="hero-status" aria-label="Abdul Company direction">
+          <div className="hero-marquee" aria-hidden="true">
             <div>
-              <span>Yang dijaga</span>
-              <strong>Jejak karya</strong>
-            </div>
-            <div>
-              <span>Bentuk pertama</span>
-              <strong>Artha System</strong>
-            </div>
-            <div>
-              <span>Arah berikutnya</span>
-              <strong>Studio brand kecil</strong>
+              {[...heroTicker, ...heroTicker].map((item, index) => (
+                <span key={`${item}-${index}`}>{item}</span>
+              ))}
             </div>
           </div>
         </section>
@@ -405,25 +471,26 @@ function App() {
         <section className="purpose section-shell" id="purpose">
           <div className="section-heading">
             <p className="eyebrow">Purpose</p>
-            <h2>Bukan panggung untuk terlihat besar. Ini ruang untuk bertumbuh dengan arah.</h2>
+            <h2>Bukan semua harus jadi besar. Tapi semua harus punya jejak.</h2>
             <p>
-              Fokus utamanya adalah dokumentasi perjalanan. Dari sana, setiap
-              project bisa menemukan bentuknya sendiri tanpa kehilangan asalnya.
+              Ini blog pribadi kalau dilihat dari isinya, dan brand kalau
+              dilihat dari cara gue merapikannya. Tempat buat menaruh hal yang
+              sedang dicari bentuknya, sampai sebagian dari mereka siap punya
+              nama sendiri.
             </p>
           </div>
 
-          <div className="purpose-grid">
-            {purposeCards.map((card) => (
-              <article key={card.title} className="purpose-card">
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
-              </article>
-            ))}
-          </div>
+          <p className="manifesto-quote">
+            Arsip ini bukan museum. Ini meja kerja yang terus bergerak.
+          </p>
 
-          <div className="principles-strip" aria-label="Brand principles">
-            {principles.map((principle) => (
-              <span key={principle}>{principle}</span>
+          <div className="purpose-lines">
+            {purposeLines.map((line) => (
+              <article key={line.title} className="purpose-line">
+                <span className="purpose-index">{line.number}</span>
+                <h3>{line.title}</h3>
+                <p>{line.description}</p>
+              </article>
             ))}
           </div>
         </section>
@@ -432,106 +499,151 @@ function App() {
           <div className="section-heading split">
             <div>
               <p className="eyebrow">My Recent Work</p>
-              <h2>Bukti lebih dulu. Cerita menyusul dengan tenang.</h2>
+              <h2>Artha System bukan pajangan. Ini bukti kerja.</h2>
             </div>
             <p>
-              Untuk sekarang, bagian ini adalah pusat Abdul Company. Tiap karya
-              tidak hanya dipajang, tapi dicatat sebagai jejak keputusan,
-              percobaan, dan keberanian untuk mulai.
+              Slide pertama adalah yang sudah hidup. Sisanya gue taruh sebagai
+              ruang bayangan: ide yang nanti bisa dipilih, diuji, atau dibuang.
             </p>
           </div>
 
-          <article className="featured-work">
-            <div className="featured-media">
-              <img src={inventoryImage} alt="Artha System inventory project" />
-              <div className="live-badge">Live product</div>
-            </div>
-            <div className="featured-copy">
-              <p className="eyebrow">Owned brand / Inventory system</p>
-              <h3>Artha System</h3>
-              <p>
-                Artha System lahir dari kebutuhan untuk membuat operasional
-                lebih sadar terhadap datanya sendiri. Ia bukan hanya menghitung
-                stok, tapi membaca ritme kerja: kapan harus PO, apa yang perlu
-                didorong, dan keputusan apa yang sebaiknya dibuat sebelum
-                masalah terlihat.
-              </p>
-              <div className="feature-points">
-                <span>Inventory control</span>
-                <span>Worksheet</span>
-                <span>Operational monitoring</span>
+          <div className="work-carousel" aria-label="Recent work carousel">
+            <article
+              key={activeWork.title}
+              className={`featured-work featured-work-${activeWork.tone}`}
+            >
+              <div className="featured-media">
+                <img
+                  src={activeWork.image}
+                  alt={`${activeWork.title} preview`}
+                />
+                <div className="live-badge">{activeWork.label}</div>
               </div>
-              <div className="work-actions">
-                <a
-                  className="button primary"
-                  href={ARTHA_SYSTEM_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Buka live site <FiExternalLink />
-                </a>
-                <a
-                  className="button ghost"
-                  href={DRIVE_PROJECT_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Buka arsip <FiArrowRight />
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <div className="archive-grid">
-            {archiveProjects.map((project) => (
-              <article key={project.title} className="archive-card">
-                <img src={project.image} alt={project.title} />
-                <div>
-                  <span>{project.label}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  {project.type === "preview" ? (
-                    <a href="#preview" onClick={openPdfPreview}>
-                      <FiFileText /> {project.action}
-                    </a>
-                  ) : (
-                    <a href={project.href}>
-                      {project.action} <FiArrowRight />
-                    </a>
-                  )}
+              {activeWork.signals && (
+                <div className="system-signals" aria-hidden="true">
+                  {activeWork.signals.map((signal) => (
+                    <div key={signal.label}>
+                      <span>{signal.label}</span>
+                      <strong>{signal.value}</strong>
+                    </div>
+                  ))}
                 </div>
-              </article>
-            ))}
+              )}
+              <div className="featured-copy">
+                <span className="featured-number">{activeWork.number}</span>
+                <p className="eyebrow">{activeWork.eyebrow}</p>
+                <h3>{activeWork.title}</h3>
+                <p>{activeWork.description}</p>
+                <div className="feature-points">
+                  {activeWork.points.map((point) => (
+                    <span key={point}>{point}</span>
+                  ))}
+                </div>
+                <div className="work-actions">
+                  <a
+                    className="button primary"
+                    href={activeWork.primaryAction.href}
+                    target={
+                      activeWork.primaryAction.external ? "_blank" : undefined
+                    }
+                    rel={
+                      activeWork.primaryAction.external
+                        ? "noreferrer"
+                        : undefined
+                    }
+                  >
+                    {activeWork.primaryAction.label}{" "}
+                    {activeWork.primaryAction.external ? (
+                      <FiExternalLink />
+                    ) : (
+                      <FiArrowRight />
+                    )}
+                  </a>
+                  <a
+                    className="button ghost"
+                    href={activeWork.secondaryAction.href}
+                    target={
+                      activeWork.secondaryAction.external ? "_blank" : undefined
+                    }
+                    rel={
+                      activeWork.secondaryAction.external
+                        ? "noreferrer"
+                        : undefined
+                    }
+                  >
+                    {activeWork.secondaryAction.label}{" "}
+                    {activeWork.secondaryAction.external ? (
+                      <FiExternalLink />
+                    ) : (
+                      <FiArrowRight />
+                    )}
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <div className="carousel-controls" aria-label="Work slide controls">
+              <button
+                type="button"
+                className="carousel-arrow"
+                aria-label="Previous work"
+                onClick={() => goToWorkSlide(activeWorkIndex - 1)}
+              >
+                <span aria-hidden="true">{"<"}</span>
+              </button>
+              <div className="carousel-dots">
+                {workSlides.map((slide, index) => (
+                  <button
+                    key={slide.title}
+                    type="button"
+                    className={index === activeWorkIndex ? "active" : ""}
+                    aria-label={`Go to ${slide.title}`}
+                    aria-current={index === activeWorkIndex}
+                    onClick={() => goToWorkSlide(index)}
+                  >
+                    <span>{slide.number}</span>
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                className="carousel-arrow"
+                aria-label="Next work"
+                onClick={() => goToWorkSlide(activeWorkIndex + 1)}
+              >
+                <span aria-hidden="true">{">"}</span>
+              </button>
+            </div>
           </div>
         </section>
 
         <section className="vision section-shell" id="vision">
           <div className="vision-copy">
             <p className="eyebrow">Direction</p>
-            <h2>Yang dicari bukan riuh. Yang dibangun adalah arah.</h2>
+            <h2>Pelan-pelan, arsip ini jadi peta jalan.</h2>
             <p>
-              Satu tahun ke depan, Abdul Company diarahkan menjadi rumah yang
-              lebih tertata: tempat project diuji, brand kecil dirawat, client
-              dipilih dengan cocok, dan partner dibangun dengan nilai yang
-              sejalan.
+              Gue nggak mau Abdul Company terdengar lebih besar dari
+              kenyataannya. Tapi gue juga nggak mau perjalanan ini berantakan.
+              Jadi tiap langkah dirapikan: mana yang jadi project, mana yang
+              jadi brand, mana yang cukup tinggal sebagai pelajaran.
             </p>
           </div>
           <div className="vision-grid">
             <div>
-              <strong>03</strong>
-              <span>project aktif</span>
-            </div>
-            <div>
-              <strong>05</strong>
-              <span>brand kecil</span>
-            </div>
-            <div>
               <strong>01</strong>
-              <span>company profile</span>
+              <span>Arsip kerja yang terus diisi</span>
             </div>
             <div>
-              <strong>+</strong>
-              <span>client dan partner</span>
+              <strong>02</strong>
+              <span>Project nyata ditaruh paling depan</span>
+            </div>
+            <div>
+              <strong>03</strong>
+              <span>Brand kecil tumbuh kalau sudah siap</span>
+            </div>
+            <div>
+              <strong>04</strong>
+              <span>Kolaborasi masuk saat nilainya jelas</span>
             </div>
           </div>
         </section>
@@ -540,19 +652,23 @@ function App() {
           <div className="contact-layout">
             <div className="contact-copy">
               <p className="eyebrow">Contact</p>
-              <h2>Percakapan yang baik biasanya dimulai dari konteks yang jujur.</h2>
+              <h2>Kalau ada yang nyambung, mulai dari cerita.</h2>
               <p>
-                Untuk project, dokumentasi, brand kecil, atau kolaborasi, kirim
-                pesan singkat tentang apa yang sedang lo bangun dan kenapa itu
-                penting. Dari sana, arah bisa dibaca lebih jernih.
+                Buat project, dokumentasi, sistem, brand kecil, atau kolaborasi,
+                kirim pesan tentang apa yang lagi lo pikirin. Nggak perlu
+                dibikin kaku. Yang penting arahnya jelas.
               </p>
               <div className="social-row" aria-label="Social links">
                 {socialLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
-                    target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                    target={
+                      link.href.startsWith("mailto:") ? undefined : "_blank"
+                    }
+                    rel={
+                      link.href.startsWith("mailto:") ? undefined : "noreferrer"
+                    }
                     aria-label={link.label}
                   >
                     {link.icon}
@@ -571,53 +687,11 @@ function App() {
           <span>Abdul Company</span>
         </div>
         <p>
-          Personal brand yang sedang tumbuh menjadi creative studio untuk
-          karya yang terdokumentasi, brand kecil, dan kolaborasi yang punya
-          arah.
+          Arsip pribadi berwajah brand: tempat project, catatan, eksperimen, dan
+          kolaborasi gue kumpulkan.
         </p>
         <p>(c) 2026 Muhamad Abdul Yusuf. All rights reserved.</p>
       </footer>
-
-      {activeModal && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div
-            className="modal-content pdf-modal"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="pdf-close-icon"
-              onClick={closeModal}
-              aria-label="Close preview"
-            >
-              <FiX />
-            </button>
-
-            <div className="pdf-modal-header">
-              <div>
-                <p className="eyebrow">Archive preview</p>
-                <h3>{activeModal.title}</h3>
-                <p>{activeModal.detail}</p>
-              </div>
-            </div>
-
-            <div
-              className="pdf-preview-shell"
-              onContextMenu={(event) => event.preventDefault()}
-              onDragStart={(event) => event.preventDefault()}
-            >
-              <PdfPreview src={activeModal.pdfSrc} />
-            </div>
-
-            <div className="pdf-modal-footer">
-              <p>Preview ini adalah bagian dari arsip kerja Abdul Company.</p>
-              <a className="button secondary" href="#contact" onClick={closeModal}>
-                Mulai percakapan <FiArrowRight />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
