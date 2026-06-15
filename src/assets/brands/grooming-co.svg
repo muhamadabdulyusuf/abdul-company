@@ -1,0 +1,21 @@
+<svg width="320" height="72" viewBox="0 0 320 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="groomingGold" x1="8" y1="8" x2="70" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff0b8"/>
+      <stop offset="0.34" stop-color="#c79a45"/>
+      <stop offset="0.68" stop-color="#f3d481"/>
+      <stop offset="1" stop-color="#9c6d2c"/>
+    </linearGradient>
+    <linearGradient id="groomingText" x1="80" y1="18" x2="292" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7f2e8"/>
+      <stop offset="1" stop-color="#c8d8ea"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <circle cx="38" cy="36" r="25" stroke="url(#groomingGold)" stroke-width="5.5"/>
+    <path d="M54 23.5C50.5 16.8 43.4 12.4 35.4 13.2C23.2 14.4 13.8 25.3 15 37.5C16.1 49.1 26.1 58.1 37.7 58.1C46.3 58.1 53.7 53.2 57.5 46.1" stroke="url(#groomingGold)" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M47.8 35.7H37.8V42.5H55.7C55.7 30.8 47.9 22.7 37.4 22.7C27.1 22.7 19.3 30.6 19.3 40.6" stroke="url(#groomingGold)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="78" y="34" fill="url(#groomingText)" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-weight="700" letter-spacing="0.8">GROOMING CO.</text>
+  <text x="81" y="55" fill="#87a8c8" font-family="Poppins, Arial, sans-serif" font-size="10.5" font-weight="500" letter-spacing="7">OFFICIAL</text>
+</svg>

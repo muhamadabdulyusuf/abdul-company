@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
 import "./App.css";
-import founderImage from "./assets/1757928406747.png";
 import logoImage from "./assets/ABDUL_COMPANY.png";
 import inventoryImage from "./assets/excel.jpg";
+import founderImage from "./assets/founder-cutout.png";
 import planningImage from "./assets/service1.jpg";
 import notebookImage from "./assets/squre.jpg";
+import arthaBrandLogo from "./assets/brands/artha-system.svg";
+import groomingBrandLogo from "./assets/brands/grooming-co.svg";
+import vittyaBrandLogo from "./assets/brands/vittya.svg";
 
 import {
   FiAlertCircle,
@@ -18,7 +21,6 @@ import {
   FiX,
 } from "react-icons/fi";
 import {
-  SiGithub,
   SiGmail,
   SiInstagram,
   SiLinkedin,
@@ -90,14 +92,22 @@ const purposeLines = [
   },
 ];
 
-const heroTicker = [
-  "Yang dibangun",
-  "Yang dicatat",
-  "Yang diuji",
-  "Yang dirapikan",
-  "Yang mulai hidup",
-  "Yang siap tumbuh",
-  "Yang bisa diajak kerja",
+const brandTicker = [
+  {
+    name: "Grooming Co.",
+    logo: groomingBrandLogo,
+    tone: "grooming",
+  },
+  {
+    name: "Vittya.com",
+    logo: vittyaBrandLogo,
+    tone: "vittya",
+  },
+  {
+    name: "Artha System",
+    logo: arthaBrandLogo,
+    tone: "artha",
+  },
 ];
 
 const systemSignals = [
@@ -427,10 +437,10 @@ function App() {
             <img src={founderImage} alt="" />
           </div>
           <div className="hero-note" aria-hidden="true">
-            <span>Field note 001</span>
+            <span></span>
             <p>
-              Yang belum matang tidak dibuang. Dicatat dulu sampai ketemu
-              bentuk.
+              Kalam takdir belum terucap. Biarkan ia bersemayam dalam
+              keheningan, mengalir tenang menuju takdirnya.
             </p>
           </div>
 
@@ -446,7 +456,7 @@ function App() {
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#work">
-                Lihat yang sudah hidup <FiArrowRight />
+                My recent work <FiArrowRight />
               </a>
               {/* <a
                 className="button secondary"
@@ -461,8 +471,13 @@ function App() {
 
           <div className="hero-marquee" aria-hidden="true">
             <div>
-              {[...heroTicker, ...heroTicker].map((item, index) => (
-                <span key={`${item}-${index}`}>{item}</span>
+              {[...brandTicker, ...brandTicker, ...brandTicker, ...brandTicker].map((brand, index) => (
+                <span
+                  className={`brand-ticker-item brand-ticker-${brand.tone}`}
+                  key={`${brand.name}-${index}`}
+                >
+                  <img className="brand-logo" src={brand.logo} alt={brand.name} />
+                </span>
               ))}
             </div>
           </div>

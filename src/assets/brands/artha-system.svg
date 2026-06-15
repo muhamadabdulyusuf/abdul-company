@@ -1,0 +1,27 @@
+<svg width="320" height="72" viewBox="0 0 320 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="arthaTeal" x1="8" y1="13" x2="64" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c2e5e0"/>
+      <stop offset="1" stop-color="#6aaea8"/>
+    </linearGradient>
+    <linearGradient id="arthaBlue" x1="22" y1="5" x2="75" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#37637d"/>
+      <stop offset="1" stop-color="#142d45"/>
+    </linearGradient>
+    <linearGradient id="arthaOrange" x1="54" y1="26" x2="81" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffbd4a"/>
+      <stop offset="1" stop-color="#f07124"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <path d="M34 8L52 18.5L34 29L16 18.5L34 8Z" fill="#d7efec" stroke="url(#arthaBlue)" stroke-width="4"/>
+    <path d="M16 18.5L34 29V50L16 39.5V18.5Z" fill="url(#arthaTeal)" stroke="url(#arthaBlue)" stroke-width="4"/>
+    <path d="M52 18.5L34 29V50L52 39.5V18.5Z" fill="#f3fbfa" stroke="url(#arthaBlue)" stroke-width="4"/>
+    <path d="M52 39.5L70 29L88 39.5L70 50L52 39.5Z" fill="#fff3df" stroke="url(#arthaOrange)" stroke-width="4"/>
+    <path d="M70 50V63.5L88 53V39.5L70 50Z" fill="#ffd28a" stroke="url(#arthaOrange)" stroke-width="4"/>
+    <path d="M52 39.5V53L70 63.5V50L52 39.5Z" fill="#f6fbfb" stroke="url(#arthaBlue)" stroke-width="4"/>
+    <path d="M34 29L52 39.5L34 50L16 39.5L34 29Z" fill="#eef8f7" stroke="url(#arthaBlue)" stroke-width="4"/>
+  </g>
+  <text x="105" y="35" fill="#f4f7fb" font-family="Poppins, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="0.6">ARTHA</text>
+  <text x="105" y="55" fill="#88a7bd" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3.6">SYSTEM</text>
+</svg>

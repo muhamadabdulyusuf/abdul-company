@@ -342,42 +342,20 @@ img {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  opacity: 0.48;
+  opacity: 0.58;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.28) 24%, #000 46%, #000 74%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.28) 24%, #000 46%, #000 74%, transparent 100%);
-}
-
-.hero-figure::before,
-.hero-figure::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.hero-figure::before {
-  z-index: 1;
-  background:
-    linear-gradient(90deg, rgba(8, 11, 15, 0.9), rgba(8, 11, 15, 0.12) 48%, rgba(8, 11, 15, 0.48)),
-    linear-gradient(180deg, rgba(8, 11, 15, 0.08), rgba(8, 11, 15, 0.42));
-}
-
-.hero-figure::after {
-  z-index: 2;
-  background:
-    linear-gradient(105deg, transparent 0 48%, rgba(244, 201, 93, 0.12) 52%, transparent 58%),
-    repeating-linear-gradient(90deg, transparent 0 72px, rgba(255, 255, 255, 0.04) 72px 73px);
-  mix-blend-mode: screen;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.38) 18%, #000 40%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.38) 18%, #000 40%, #000 100%);
 }
 
 .hero-figure img {
   position: relative;
-  z-index: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: right bottom;
-  filter: saturate(0.95) contrast(1.08) brightness(0.92);
+  filter: saturate(0.98) contrast(1.05) brightness(0.95) drop-shadow(-34px 34px 58px rgba(0, 0, 0, 0.36));
 }
 
 .hero-note {
@@ -512,29 +490,67 @@ img {
   width: max-content;
   display: flex;
   align-items: center;
-  gap: 2.2rem;
-  min-height: 38px;
+  gap: 1rem;
+  min-height: 64px;
   padding-left: 7%;
-  animation: marqueeMove 32s linear infinite;
+  animation: marqueeMove 34s linear infinite;
 }
 
-.hero-marquee span {
+.brand-ticker-item {
+  --brand-plate: rgba(255, 255, 255, 0.045);
+  --brand-border: rgba(255, 255, 255, 0.1);
+  --brand-glow: rgba(255, 255, 255, 0.08);
   position: relative;
-  color: rgba(212, 219, 228, 0.72);
-  font-size: 0.76rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  display: inline-flex;
+  width: 268px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.48rem 1.05rem;
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+    var(--brand-plate);
+  box-shadow:
+    0 14px 36px var(--brand-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.hero-marquee span::after {
+.brand-ticker-item::after {
   content: "";
   position: absolute;
   top: 50%;
-  right: -1.25rem;
+  right: -0.64rem;
   width: 0.36rem;
   height: 0.36rem;
   transform: translateY(-50%) rotate(45deg);
   border: 1px solid rgba(244, 201, 93, 0.46);
+}
+
+.brand-logo {
+  width: auto;
+  max-width: 100%;
+  height: 42px;
+  object-fit: contain;
+}
+
+.brand-ticker-grooming {
+  --brand-plate: rgba(70, 56, 34, 0.22);
+  --brand-border: rgba(244, 201, 93, 0.22);
+  --brand-glow: rgba(244, 201, 93, 0.08);
+}
+
+.brand-ticker-vittya {
+  --brand-plate: rgba(73, 50, 29, 0.2);
+  --brand-border: rgba(241, 208, 151, 0.2);
+  --brand-glow: rgba(241, 208, 151, 0.07);
+}
+
+.brand-ticker-artha {
+  --brand-plate: rgba(20, 45, 69, 0.2);
+  --brand-border: rgba(0, 184, 255, 0.2);
+  --brand-glow: rgba(0, 184, 255, 0.08);
 }
 
 .live-badge,
@@ -1451,13 +1467,44 @@ img {
     left: -0.85rem;
   }
 
+  .hero-content,
+  .hero h1,
+  .hero-copy,
+  .section-heading,
+  .section-heading h2,
+  .section-heading p:not(.eyebrow),
+  .vision-copy h2,
+  .vision-copy p,
+  .contact-copy h2,
+  .contact-copy p {
+    max-width: 100%;
+  }
+
+  .eyebrow {
+    display: block;
+    width: 100%;
+    line-height: 1.45;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
   .hero h1 {
     font-size: 2.75rem;
     line-height: 0.98;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  .section-heading h2,
+  .vision-copy h2,
+  .contact-copy h2 {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
   }
 
   .hero-copy {
     font-size: 1rem;
+    overflow-wrap: break-word;
   }
 
   .hero-actions,
@@ -1588,7 +1635,13 @@ img {
 
 @media (max-width: 420px) {
   .hero h1 {
-    font-size: 2.42rem;
+    font-size: 2.22rem;
+  }
+
+  .section-heading h2,
+  .vision-copy h2,
+  .contact-copy h2 {
+    font-size: 1.95rem;
   }
 
   .hero-copy,
